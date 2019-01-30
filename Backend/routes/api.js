@@ -18,7 +18,7 @@ router.get('/', (req, res)=>{
     res.send("From Api router")
 })
 
-router.post('register', (req, res)=>{
+router.post('/register', (req, res)=>{
     let userData = req.body
     let user = new User(userData)
 
@@ -32,7 +32,7 @@ router.post('register', (req, res)=>{
     })
 })
 
-router.post('login', (req, res)=>{
+router.post('/login', (req, res)=>{
     let userData = req.body
 
     User.findOne({email: userData.email},(err, user)=>{
