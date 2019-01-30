@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 })
 export class RegistrationComponent implements OnInit {
   registerUserData = {}
+  provera:any;
 
   constructor(private _auth: AuthService) { }
 
@@ -18,7 +19,7 @@ export class RegistrationComponent implements OnInit {
      this._auth.registerUser(this.registerUserData)
      .subscribe(
        res=>console.log(res),
-       err=> console.log(err)
+       err=>console.log(err)
      )
   }
 

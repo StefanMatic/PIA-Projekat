@@ -1,21 +1,77 @@
-<div class="row pt-5">
-  <div class="col-md-6 mx-auto">
-    <div class="card rounded-5">
+<div class="row pt-5 pb-5">
+  <div class="col-md-8 mx-auto">
+    <div class="card rounded-10">
       <div class="card-header">
         <h3 class="mb-0">Register</h3>
       </div>
       <div class="card-body">
-        <form class="form">
-          <div class="form-group">
-            <label for="">Email</label>
-            <input [(ngModel)]="registerUserData.email" name="email" type="text" class="form-control rounded-0" required>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="student-tab" data-toggle="pill" href="#student" role="tab">Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="kompanija-tab" data-toggle="pill" href="#kompanija" role="tab">Kompanija</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+          <!--Forma za studente-->
+          <div class="tab-pane fade show active" id="student" role="tabpanel" aria-labelledby="pills-home-tab">
+            <form class="form">
+              <div class="form-group">
+                <label for="">Username:</label>
+                <input [(ngModel)]="registerUserData.username" name="username" type="text" class="form-control rounded-5"
+                  required>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="">Password:</label>
+                  <input [(ngModel)]="registerUserData.password" name="password" type="password" class="form-control rounded-5"
+                    required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="">Repeat password:</label>
+                  <input name="password" type="password" class="form-control rounded-5" required>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label for="">Name:</label>
+                <input [(ngModel)]="registerUserData.name" name="name" type="text" class="form-control rounded-5"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="">Lastname:</label>
+                <input [(ngModel)]="registerUserData.lastname" name="lastname" type="text" class="form-control rounded-5"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="">Number:</label>
+                <input [(ngModel)]="registerUserData.number" name="number" type="text" class="form-control rounded-5"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="">Email:</label>
+                <input [(ngModel)]="registerUserData.email" name="email" type="email" class="form-control rounded-5"
+                  required>
+              </div>
+              <div class="form-control">
+                <input [(ngModel)]='registerUserData.graduated' name="dipl" type="checkbox">
+                <label class="form-check-label">
+                  Graduated
+                </label>
+              </div>
+              <button (click)="registerUser()" type="button" class="btn-primary btn mt-5">Register</button>
+            </form>
           </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input [(ngModel)]="registerUserData.password" name="password" type="password" class="form-control rounded-0" required>
+
+          <!--Forma za kompaniju-->
+          <div class="tab-pane fade" id="kompanija" role="tabpanel" aria-labelledby="pills-profile-tab">
+            Kompanija
           </div>
-          <button (click)="registerUser()" type="button" class="btn-primary btn">Register</button> 
-        </form>
+        </div>
+
+
       </div>
     </div>
   </div>

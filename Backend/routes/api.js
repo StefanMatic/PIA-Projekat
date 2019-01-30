@@ -47,7 +47,8 @@ router.post('/login', (req, res)=>{
                 if (user.password !== userData.password){
                     res.status(401).send("Invalid password")
                 }
-                res.status(200).send(user)
+                else
+                    res.status(200).send(user)
             }
         }
     })
