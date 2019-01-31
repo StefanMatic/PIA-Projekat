@@ -30,6 +30,8 @@ export class StudentFormComponent implements OnInit {
   }
 
   onSubmit(){
+    this.student.role="0";
+
     //account info
     this.student.username = this.studentForm.value.accountInfo.username;
     this.student.password = this.studentForm.value.accountInfo.password;

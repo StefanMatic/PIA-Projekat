@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { CompanyFormComponent } from './company-form/company-form.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -16,14 +19,17 @@ import { StudentFormComponent } from './student-form/student-form.component';
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    CompanyFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
