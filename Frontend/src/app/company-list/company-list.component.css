@@ -1,0 +1,13 @@
+.image-logo{
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.be-inline{
+    display: inline;
+}
+
+.use-col{
+    width:100%;
+    text-align: center;
+}
