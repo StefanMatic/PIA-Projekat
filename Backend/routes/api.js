@@ -108,4 +108,13 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.get('/allCompanies', (req, res)=>{
+    User.find({role:"1"}, (err, companies)=>{
+        if (err)
+            console.log(err)
+        else 
+            res.json(companies)
+    })
+})
+
 module.exports = router

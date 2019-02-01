@@ -15,6 +15,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CompanyComponent } from './company/company.component';
 import { StudentComponent } from './student/student.component';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyListServiceService } from './company-list-service.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, CompanyListServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
