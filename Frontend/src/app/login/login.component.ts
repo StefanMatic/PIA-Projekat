@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   loginUserData = {}
+  imagePath:String = "../image/logo.png"
 
   constructor(private _auth: AuthService) { }
 

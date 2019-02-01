@@ -2,7 +2,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-    background-image: url("./app/images/background.png");
-    background-repeat: no-repeat;
+  background-image: linear-gradient(to bottom right, #f8f9fa, rgba(255, 176, 30, 0.288));
+  background-repeat: no-repeat;
+  background-size: 100%;
   }
 

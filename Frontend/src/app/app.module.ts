@@ -12,6 +12,8 @@ import { StudentFormComponent } from './student-form/student-form.component';
 import { CompanyFormComponent } from './company-form/company-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CompanyComponent } from './company/company.component';
+import { StudentComponent } from './student/student.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     RegistrationComponent,
     LoginComponent,
     StudentFormComponent,
-    CompanyFormComponent
+    CompanyFormComponent,
+    CompanyComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,

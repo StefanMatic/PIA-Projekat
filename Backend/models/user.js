@@ -15,6 +15,9 @@ const userSchema = new Schema({
     lastname:String,
     number:String,
     email:String,
+    image:{
+        type:String
+    },
 
     //DODATAK ZA STUDENTA
     graduated:Boolean,

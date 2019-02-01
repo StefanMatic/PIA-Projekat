@@ -1,4 +1,5 @@
 export interface Company{
+    role:String,
     username:String,
     password:String,
     name:String,
@@ -9,5 +10,6 @@ export interface Company{
     email:String,
     web:String,
     activities:Array<any>,
-    speciality:String
+    speciality:String,
+    image:String
 }

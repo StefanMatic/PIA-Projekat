@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { mimeType } from '../mime-type.validator';
+
+import { Company } from '../models/compnay';
 
 
 @Component({
@@ -9,30 +12,34 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./company-form.component.css']
 })
 export class CompanyFormComponent implements OnInit {
-  company:any={}
+  company: any = {}
+  companyRole: String = "1"
 
   companyForm = this.fb.group({
     accountInfo: this.fb.group({
-      username: [''],
-      password: [''],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     }),
     companyInfo: this.fb.group({
-      name: [''],
+      name: ['', Validators.required],
       location: this.fb.group({
-        city: [''],
-        address: ['']
+        city: ['', Validators.required],
+        address: ['', Validators.required]
       }),
-      pib: [''],
-      numOfEmployees: [''],
-      email: [''],
-      web: [''],
-      selectedItems:[''],
-      speciality:['']
+      pib: ['', Validators.required],
+      numOfEmployees: ['', Validators.required],
+      email: ['', Validators.required],
+      web: ['', Validators.required],
+      selectedItems: ['', Validators.required],
+      speciality: ['', Validators.required],
+      image: ['', Validators.required, mimeType ]
     })
   })
 
   dropdownList = [];
   dropdownSettings = {};
+
+  imagePreview:string | ArrayBuffer;
 
   constructor(private fb: FormBuilder, private _auth: AuthService) { }
 
@@ -57,21 +64,33 @@ export class CompanyFormComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    console.log(this.companyForm.value.companyInfo.selectedItems);
-    console.log(item);
   }
+
   onSelectAll(items: any) {
     this.companyForm.patchValue({
-      companyInfo:{
+      companyInfo: {
         selectedItems: items
       }
     });
-    console.log(this.companyForm.value.companyInfo.selectedItems);
-    console.log(items);
   }
 
-  onSubmit(){
-    this.company.role="1";
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.companyForm.patchValue({
+      companyInfo: {
+        image: file
+      }
+    });
+    this.companyForm.get("companyInfo.image").updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onSubmit() {
+    this.company.role = this.companyRole;
     this.company.username = this.companyForm.value.accountInfo.username;
     this.company.password = this.companyForm.value.accountInfo.password;
     this.company.name = this.companyForm.value.companyInfo.name;
@@ -83,12 +102,16 @@ export class CompanyFormComponent implements OnInit {
     this.company.web = this.companyForm.value.companyInfo.web;
     this.company.activities = this.companyForm.value.companyInfo.selectedItems;
     this.company.speciality = this.companyForm.value.companyInfo.speciality;
+    this.company.image = this.companyForm.value.companyInfo.image;
 
-    console.log(this.company);
-    this._auth.registerUser(this.company).subscribe(
-      res=>console.log(res),
-      err=>console.log(err)
+    this._auth.registerCompany(this.company).subscribe(
+      (res:Company) => {
+        console.log(res)
+      },
+      err => console.log(err)
     )
+
+    this.companyForm.reset();
   }
 
 }
