@@ -63,7 +63,6 @@ router.post('/registerCompany', multer({storage: storage}).single("image"),(req,
         speciality: req.body.speciality,
         image: url + "/images/" + req.file.filename
     });
-
     companyData.save((err, company) => {
         if (err) {
             console.log(err);
@@ -87,7 +86,6 @@ router.post('/registerStudent', multer({storage: storage}).single("image"),(req,
         graduated: req.body.graduated,
         image: url + "/images/" + req.file.filename
     });
-
     studentData.save((err, student) => {
         if (err) {
             console.log(err);
@@ -100,22 +98,12 @@ router.post('/registerStudent', multer({storage: storage}).single("image"),(req,
 
 router.post('/login', (req, res) => {
     let userData = req.body
-
-    User.findOne({ email: userData.email }, (err, user) => {
+    User.findOne({ username: userData.username, password: userData.password }, (err, user) => {
         if (err) {
             console.log(err)
         }
         else {
-            if (!user) {
-                res.status(401).send("Invalid user")
-            }
-            else {
-                if (user.password !== userData.password) {
-                    res.status(401).send("Invalid password")
-                }
-                else
-                    res.status(200).send(user)
-            }
+            res.json(user)
         }
     })
 })

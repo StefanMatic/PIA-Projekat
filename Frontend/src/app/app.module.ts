@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CompanyComponent } from './company/company.component';
 import { StudentComponent } from './student/student.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StudentComponent } from './student/student.component';
     StudentFormComponent,
     CompanyFormComponent,
     CompanyComponent,
-    StudentComponent
+    StudentComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,

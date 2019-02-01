@@ -1,5 +1,5 @@
 export interface Student{
-    role:String;
+    role:String,
     username:String,
     password:String,
     name:String,

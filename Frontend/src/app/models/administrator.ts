@@ -1,4 +1,4 @@
-export interface Student{
+export interface Administrator{
     role:String,
     username:String,
     password:String,

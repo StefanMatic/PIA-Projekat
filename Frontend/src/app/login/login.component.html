@@ -1,5 +1,5 @@
 <div class="row pt-5">
-  <div class="col-md-4 offset-md-1" id ="logo">
+  <div class="col-md-4 offset-md-1" id="logo">
     <!--Dati pristup ili naci drugo resenje-->
     <img src="assets/image/logo.png" class="img-fluid" alt="logo">
   </div>
@@ -12,12 +12,16 @@
         <form class="form">
           <div class="form-group">
             <label for="">Email</label>
-            <input [(ngModel)]="loginUserData.email" name="email" type="text" class="form-control rounded-0" required>
+            <input [(ngModel)]="loginUserData.username" name="username" type="text" class="form-control rounded-0"
+              required>
           </div>
           <div class="form-group">
             <label for="">Password</label>
             <input [(ngModel)]="loginUserData.password" name="password" type="password" class="form-control rounded-0"
               required>
+          </div>
+          <div *ngIf="badInput" class="alert alert-danger">
+            Wrong username or password! Please try again!
           </div>
           <button (click)="loginUser()" type="button" class="btn-primary btn">Login</button>
         </form>

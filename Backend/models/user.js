@@ -8,28 +8,38 @@ const userSchema = new Schema({
     //2 - admin
 
     //ZA ADMINA
-    role:String,
-    username:String,
-    password:String,
-    name:String,
-    lastname:String,
-    number:String,
-    email:String,
-    image:{
-        type:String
+    role: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    name: String,
+    lastname: String,
+    number: String,
+    email: String,
+    image: {
+        type: String
     },
 
     //DODATAK ZA STUDENTA
-    graduated:Boolean,
+    graduated: Boolean,
 
     //DODATAK ZA KOMPANIJU
-    city:String,
-    address:String,
-    pib:String,
-    numOfEmployees:String,
-    web:String,
-    activities:Array,
-    speciality:String
+    city: String,
+    address: String,
+    pib: String,
+    numOfEmployees: String,
+    web: String,
+    activities: Array,
+    speciality: String
 })
 
-module.exports = mongoose.model('User',userSchema, "users")
+module.exports = mongoose.model('User', userSchema, "users")
