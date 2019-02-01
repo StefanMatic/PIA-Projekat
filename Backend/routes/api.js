@@ -75,8 +75,17 @@ router.post('/registerCompany', multer({storage: storage}).single("image"),(req,
 })
 
 router.post('/registerStudent', multer({storage: storage}).single("image"),(req, res) => {
+    const url = req.protocol + "://" + req.get("host");
     let studentData = new User({
-        
+        role: req.body.role,
+        username: req.body.username,
+        password: req.body.password,
+        name: req.body.name,
+        lastname: req.body.lastname,
+        number: req.body.number,
+        email: req.body.email,
+        graduated: req.body.graduated,
+        image: url + "/images/" + req.file.filename
     });
 
     studentData.save((err, student) => {

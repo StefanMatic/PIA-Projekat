@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   private _loginUri = "http://localhost:4000/api/login"
-  private _registerUrl = "http://localhost:4000/api/register"
+  private _registerStudentUrl = "http://localhost:4000/api/registerStudent"
   private _registerCompanyUrl = "http://localhost:4000/api/registerCompany"
 
   constructor(private http: HttpClient) { }
 
-  registerCompany(company){
+  registerCompany(company) {
     const companyData = new FormData();
     companyData.append("role", company.role);
     companyData.append("username", company.username);
@@ -31,11 +31,23 @@ export class AuthService {
     return this.http.post<any>(this._registerCompanyUrl, companyData)
   }
 
-  registerUser(user){
-    return this.http.post<any>(this._registerUrl, user)
+  registerUser(user) {
+    const studentData = new FormData();
+    studentData.append("role", user.role);
+    studentData.append("username", user.username);
+    studentData.append("password", user.password);
+    studentData.append("name", user.name);
+    studentData.append("lastname", user.lastname);
+    studentData.append("number", user.number);
+    studentData.append("email", user.email);
+    studentData.append("image", user.image, user.username);
+    studentData.append("graduated", user.graduated);
+
+    console.log(user);
+    return this.http.post<any>(this._registerStudentUrl, studentData);
   }
 
-  loginUser(user){
+  loginUser(user) {
     return this.http.post<any>(this._loginUri, user);
   }
 }

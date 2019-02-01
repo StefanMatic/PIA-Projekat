@@ -12,6 +12,8 @@ import { Company } from '../models/compnay';
   styleUrls: ['./company-form.component.css']
 })
 export class CompanyFormComponent implements OnInit {
+    //promenljive za rad sa podacima iz forme
+
   company: any = {}
   companyRole: String = "1"
 
@@ -36,9 +38,11 @@ export class CompanyFormComponent implements OnInit {
     })
   })
 
+  //promenljive za rad sa padajucim menijem
   dropdownList = [];
   dropdownSettings = {};
 
+  //promenljive za rad sa slikom
   imagePreview:string | ArrayBuffer;
 
   constructor(private fb: FormBuilder, private _auth: AuthService) { }
@@ -91,11 +95,17 @@ export class CompanyFormComponent implements OnInit {
 
   onSubmit() {
     this.company.role = this.companyRole;
+
+    //account info
     this.company.username = this.companyForm.value.accountInfo.username;
     this.company.password = this.companyForm.value.accountInfo.password;
-    this.company.name = this.companyForm.value.companyInfo.name;
+    
+    //company info
+      //location
     this.company.city = this.companyForm.value.companyInfo.location.city;
     this.company.address = this.companyForm.value.companyInfo.location.address;
+      //other info
+    this.company.name = this.companyForm.value.companyInfo.name;
     this.company.pib = this.companyForm.value.companyInfo.pib;
     this.company.numOfEmployees = this.companyForm.value.companyInfo.numOfEmployees;
     this.company.email = this.companyForm.value.companyInfo.email;

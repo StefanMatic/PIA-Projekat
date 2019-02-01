@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { mimeType } from '../mime-type.validator';
+
+import { Student } from '../models/student';
 
 @Component({
   selector: 'app-student-form',
@@ -8,25 +11,46 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent implements OnInit {
+  //promenljive za rad sa podacima iz forme
   student:any={}
+  studentRole:String = "0"
 
   studentForm = this.fb.group({
     accountInfo: this.fb.group({
-      username: [''],
-      password: [''],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     }),
     personalInfo: this.fb.group({
-      name: [''],
-      lastname: [''],
-      number: [''],
-      email: [''],
-      graduated: ['']
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      number: ['', Validators.required],
+      email: ['', Validators.required],
+      graduated: [''],
+      image: ['', Validators.required, mimeType ]
     })
   })
+
+  //promenljive za rad sa slikom
+  imagePreview:string | ArrayBuffer;
 
   constructor(private fb: FormBuilder, private _auth: AuthService) { }
 
   ngOnInit() {
+  }
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.studentForm.patchValue({
+      personalInfo: {
+        image: file
+      }
+    });
+    this.studentForm.get("personalInfo.image").updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   onSubmit(){
@@ -41,6 +65,7 @@ export class StudentFormComponent implements OnInit {
     this.student.lastname = this.studentForm.value.personalInfo.lastname;
     this.student.number = this.studentForm.value.personalInfo.number;
     this.student.email = this.studentForm.value.personalInfo.email;
+    this.student.image = this.studentForm.value.personalInfo.image;
     this.student.graduated = this.studentForm.value.personalInfo.graduated;
 
     if (this.student.graduated === "")
@@ -48,7 +73,9 @@ export class StudentFormComponent implements OnInit {
     
     console.warn(this.student);
     this._auth.registerUser(this.student).subscribe(
-      res=>console.log(res),
+      (res:Student)=>{
+        console.log(res)
+      },
       err=>console.log(err)
     )
   }
