@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res: GetUser) => {
           if (res) {
+            localStorage.setItem("username", res.username as string)
             if (res.role === "0") {
               this.router.navigate(['/student']);
             }

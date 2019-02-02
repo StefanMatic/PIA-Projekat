@@ -16,6 +16,8 @@ import { CompanyComponent } from './company/company.component';
 import { StudentComponent } from './student/student.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyListServiceService } from './company-list-service.service';
+import { StudentService } from './student.service';
+import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { CompanyListServiceService } from './company-list-service.service';
     CompanyFormComponent,
     CompanyComponent,
     StudentComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CVstudentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { CompanyListServiceService } from './company-list-service.service';
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [AuthService, CompanyListServiceService],
+  providers: [AuthService, CompanyListServiceService, StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

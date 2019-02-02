@@ -117,4 +117,16 @@ router.get('/allCompanies', (req, res)=>{
     })
 })
 
+router.post('/currentUser', (req, res)=>{
+    console.log(req.body)
+    User.findOne({username: req.body.username}, (err, user)=>{
+        if (err){
+            console.log(err)
+        }
+        else{
+            res.json(user)
+        }
+    })
+})
+
 module.exports = router
