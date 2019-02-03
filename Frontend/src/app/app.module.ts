@@ -18,7 +18,9 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyListServiceService } from './company-list-service.service';
 import { StudentService } from './student.service';
 import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.component';
+import { CvPersonalInformationComponent } from './cv-personal-information/cv-personal-information.component';
 
+import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.componen
     CompanyComponent,
     StudentComponent,
     CompanyListComponent,
-    CVstudentFormComponent
+    CVstudentFormComponent,
+    CvPersonalInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.componen
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    DlDateTimePickerDateModule
   ],
   providers: [AuthService, CompanyListServiceService, StudentService],
   bootstrap: [AppComponent]

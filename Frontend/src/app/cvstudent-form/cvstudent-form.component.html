@@ -1,20 +1,29 @@
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-  </ul>
-  
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Some content.</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Some content in menu 1.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Some content in menu 2.</p>
+<div class="row mt-4 mb-4">
+  <div class="col-md-8 white-background mx-auto p-3">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-personal-info" role="tab"
+          aria-controls="nav-home" aria-selected="true">Personal information</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-work-experience" role="tab"
+          aria-controls="nav-profile" aria-selected="false">Work experience</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-education" role="tab"
+          aria-controls="nav-contact" aria-selected="false"> Education and training</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-personal-skills" role="tab"
+          aria-controls="nav-contact" aria-selected="false"> Personal skills</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active mt-3 p-3" id="nav-personal-info" role="tabpanel" aria-labelledby="nav-home-tab">
+        <!--================Forma za personal info==================-->
+        <app-cv-personal-information></app-cv-personal-information>
+        <!--========================================================-->
+      </div>
+      <div class="tab-pane fade" id="nav-work-experience" role="tabpanel" aria-labelledby="nav-profile-tab">Work
+        <app-cv-personal-information></app-cv-personal-information>
+      </div>
+      <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-contact-tab">Education</div>
+      <div class="tab-pane fade" id="nav-personal-skills" role="tabpanel" aria-labelledby="nav-contact-tab">..s.</div>
+
     </div>
   </div>
+</div>

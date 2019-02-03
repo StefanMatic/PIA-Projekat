@@ -1,0 +1,112 @@
+<form [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="personalInfo">
+    <h3 class="mb-2">Perosnal info:</h3>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="">Name:</label>
+        <input formControlName="name" name="name" type="text" class="form-control rounded-5">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Lastname:</label>
+        <input formControlName="lastname" name="lastname" type="text" class="form-control rounded-5">
+      </div>
+    </div>
+
+    <div class="row pl-3">
+      <label for="">Sex:</label>
+    </div>
+    <div class="row">
+      <div class="custom-control custom-radio custom-control-inline col-md-3 offset-md-2">
+        <input formControlName="sex" type="radio" id="customRadioInline1" name="sex" value="Male" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline1">Male</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline col-md-3">
+        <input formControlName="sex" type="radio" id="customRadioInline2" name="sex" value="Female" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline2">Female</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline col-md-3">
+        <input formControlName="sex" type="radio" id="customRadioInline3" name="sex" value="No" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline3">Do not indicate</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="">Date of Birth:</label>
+      <input formControlName="dateOfBirth" name="dateOfBirth" type="date" class="form-control rounded-5">
+    </div>
+  </div>
+  <hr>
+  <div formGroupName="locationInfo">
+    <h3 class="mb-2">Location info:</h3>
+
+    <div class="row">
+      <div class="form-group col-md-9">
+        <label for="">Address:</label>
+        <input formControlName="address" name="address" type="text" class="form-control rounded-5">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="">Postal code:</label>
+        <input formControlName="postalCode" name="postalCode" type="number" class="form-control rounded-5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="">Country:</label>
+        <input formControlName="country" name="country" type="text" class="form-control rounded-5">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">City:</label>
+        <input formControlName="city" name="city" type="text" class="form-control rounded-5">
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div formGroupName="contactInfo">
+    <h3 class="mb-2">Contact info:</h3>
+
+    <div formArrayName="number">
+      <label>Number:</label>
+      <div *ngFor="let num of number.controls; let i=index" class="mb-2">
+        <div [formGroupName]="i" class="row">
+          <div class="col-md-4">
+            <select formControlName="type" class="custom-select">
+              <option value="Home" selected>Home</option>
+              <option value="Work">Work</option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <input type="text" formControlName="phone" class="form-control rounded-5">
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-warning m-2 " (click)="addNumber()">Add number</button>
+    </div>
+
+    <div formArrayName="email">
+      <label>Email:</label>
+      <div class="row" *ngFor="let mail of email.controls; let i=index">
+        <div class="col-md-12 mb-1 mt-2">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addEmail()">Add email</button>
+    </div>
+
+    <div formArrayName="web">
+      <label>Web:</label>
+      <div class="row" *ngFor="let w of web.controls; let i=index">
+        <div class="col-md-12 mb-1 mt-2">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addWeb()">Add web</button>
+    </div>
+
+  </div>
+  <div class="row">
+    <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!personalInfoForm.valid">Register</button>
+  </div>
+</form>
