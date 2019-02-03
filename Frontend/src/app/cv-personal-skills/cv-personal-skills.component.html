@@ -1,3 +1,94 @@
-<p>
-  cv-personal-skills works!
-</p>
+<form [formGroup]="personalSkillsForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="languageInfo">
+    <h3 class="mb-2">Perosnal skills:</h3>
+
+    <div formArrayName="languages">
+      <label>Languages:</label>
+      <div *ngFor="let lan of languages.controls; let i=index" class="mb-2">
+        <div [formGroupName]="i" class="row">
+          <div class="col-md-4">
+            <select formControlName="level" class="custom-select">
+              <option value="C2" selected>C2</option>
+              <option value="C1">C1</option>
+              <option value="B2">B2</option>
+              <option value="B1">B1</option>
+              <option value="A2">A2</option>
+              <option value="A1">A1</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <input type="text" formControlName="lan" class="form-control rounded-5">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-danger form-control" (click)="deleteLanguage(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-warning m-2 " (click)="addLanguage()">Add language</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div formGroupName="skillsInfo">
+    <h3 class="mb-2">Skills:</h3>
+
+    <div formArrayName="comSkills">
+      <label>Communication skills:</label>
+      <div class="row" *ngFor="let com of comSkills.controls; let i=index">
+        <div class="col-md-10 mt-1 mb-1">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger form-control" (click)="deleteComSkills(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addComSkills()">Add skill</button>
+    </div>
+
+    <div formArrayName="organisationSkills">
+      <label>Organisational / managerial skills:</label>
+      <div class="row" *ngFor="let org of organisationSkills.controls; let i=index">
+        <div class="col-md-10 mt-1 mb-1">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger form-control" (click)="deleteOrganisationSkills(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addOrganisationSkills()">Add skill</button>
+    </div>
+
+    <div formArrayName="jobSkills">
+      <label>Job-related skills:</label>
+      <div class="row" *ngFor="let job of jobSkills.controls; let i=index">
+        <div class="col-md-10 mt-1 mb-1">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger form-control" (click)="deleteJobSkills(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addJobSkills()">Add skill</button>
+    </div>
+
+    <div formArrayName="digitalSkills">
+      <label>Job-related skills:</label>
+      <div class="row" *ngFor="let dig of digitalSkills.controls; let i=index">
+        <div class="col-md-10 mt-1 mb-1">
+          <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger form-control" (click)="deleteDigitalSkills(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-warning m-2" (click)="addDigitalSkills()">Add skill</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!personalSkillsForm.valid">Save</button>
+  </div>
+</form>

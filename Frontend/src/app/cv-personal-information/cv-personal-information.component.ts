@@ -85,7 +85,7 @@ export class CvPersonalInformationComponent implements OnInit {
   onSubmit() {
     if (this.personalInfoForm.valid) {
       console.log("nesto")
-      this.personal.username = this.currentUser.username
+      this.personal.username = localStorage.getItem("username")
       this.personal.first = true;
 
       this.personal.name = this.personalInfoForm.value.personalInfo.name
