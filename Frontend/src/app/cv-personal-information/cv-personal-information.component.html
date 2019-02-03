@@ -77,9 +77,12 @@
               <option value="Work">Work</option>
             </select>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-6">
             <input type="text" formControlName="phone" class="form-control rounded-5">
           </div>
+          <div class="col-md-2">
+              <button class="btn btn-danger form-control" (click)="deleteNumber(i)">Delete</button>
+            </div>
         </div>
       </div>
       <button class="btn btn-warning m-2 " (click)="addNumber()">Add number</button>
@@ -88,9 +91,12 @@
     <div formArrayName="email">
       <label>Email:</label>
       <div class="row" *ngFor="let mail of email.controls; let i=index">
-        <div class="col-md-12 mb-1 mt-2">
+        <div class="col-md-10 mt-1 mb-1">
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
+        <div class="col-md-2">
+            <button class="btn btn-danger form-control" (click)="deleteEmail(i)">Delete</button>
+          </div>
       </div>
       <button class="btn btn-warning m-2" (click)="addEmail()">Add email</button>
     </div>
@@ -98,8 +104,11 @@
     <div formArrayName="web">
       <label>Web:</label>
       <div class="row" *ngFor="let w of web.controls; let i=index">
-        <div class="col-md-12 mb-1 mt-2">
+        <div class="col-md-10 mt-1 mb-1">
           <input type="text" [formControlName]="i" class="form-control rounded-5">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-danger form-control" (click)="deleteWeb(i)">Delete</button>
         </div>
       </div>
       <button class="btn btn-warning m-2" (click)="addWeb()">Add web</button>

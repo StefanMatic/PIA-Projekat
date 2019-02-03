@@ -42,6 +42,10 @@ export class CvWorkExperienceComponent implements OnInit {
     this.experience.push(this.createItem())
   }
 
+  deleteExperience(index){
+    this.experience.removeAt(index)
+  }
+
   onSubmit() {
     if (this.workForm.valid) {
       console.log("usaoo")

@@ -72,6 +72,16 @@ export class CvPersonalInformationComponent implements OnInit {
     this.web.push(this.fb.control('', Validators.required))
   }
 
+  deleteNumber(index){
+    this.number.removeAt(index)
+  }
+  deleteEmail(index){
+    this.email.removeAt(index)
+  }
+  deleteWeb(index){
+    this.web.removeAt(index)
+  }
+
   onSubmit() {
     if (this.personalInfoForm.valid) {
       console.log("nesto")

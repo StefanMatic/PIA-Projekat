@@ -3,7 +3,7 @@
 
   <div formArrayName="experience">
     <div *ngFor="let ex of experience.controls; let i=index" class="mb-2">
-        <label>Experience {{i+1}}:</label>
+      <label>Experience {{i+1}}:</label>
       <div [formGroupName]="i" class="row">
         <div class="form-group col-md-6">
           <label for="">From:</label>
@@ -38,9 +38,13 @@
           <textarea formControlName="description" name="description" class="form-control rounded-5"></textarea>
         </div>
       </div>
+      <div class="col-md-2 offset-md-10">
+        <button class="btn btn-danger m-2 mx-auto" (click)="deleteExperience(i)">Delete</button>
+      </div>
       <hr>
     </div>
     <button class="btn btn-warning m-2 " (click)="addExperience()">Add experience</button>
+
   </div>
   <div class="row">
     <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!workForm.valid">Register</button>
