@@ -1,0 +1,48 @@
+<form [formGroup]="workForm" (ngSubmit)="onSubmit()">
+  <h3 class="mb-2">Work experience:</h3>
+
+  <div formArrayName="experience">
+    <div *ngFor="let ex of experience.controls; let i=index" class="mb-2">
+        <label>Experience {{i+1}}:</label>
+      <div [formGroupName]="i" class="row">
+        <div class="form-group col-md-6">
+          <label for="">From:</label>
+          <input formControlName="from" name="from" type="date" class="form-control rounded-5">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">To:</label>
+          <input formControlName="to" name="to" type="date" class="form-control rounded-5">
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="">Position:</label>
+          <input formControlName="position" name="position" type="text" class="form-control rounded-5">
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="">Company:</label>
+          <input formControlName="company" name="company" type="text" class="form-control rounded-5">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="">Country:</label>
+          <input formControlName="country" name="country" type="text" class="form-control rounded-5">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">City:</label>
+          <input formControlName="city" name="city" type="text" class="form-control rounded-5">
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="">Description:</label>
+          <textarea formControlName="description" name="description" class="form-control rounded-5"></textarea>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <button class="btn btn-warning m-2 " (click)="addExperience()">Add experience</button>
+  </div>
+  <div class="row">
+    <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!workForm.valid">Register</button>
+  </div>
+</form>

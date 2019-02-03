@@ -21,6 +21,7 @@ import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.componen
 import { CvPersonalInformationComponent } from './cv-personal-information/cv-personal-information.component';
 
 import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
+import { CvWorkExperienceComponent } from './cv-work-experience/cv-work-experience.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
     StudentComponent,
     CompanyListComponent,
     CVstudentFormComponent,
-    CvPersonalInformationComponent
+    CvPersonalInformationComponent,
+    CvWorkExperienceComponent
   ],
   imports: [
     BrowserModule,
