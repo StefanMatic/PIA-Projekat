@@ -1,0 +1,56 @@
+<form [formGroup]="educationForm" (ngSubmit)="onSubmit()">
+    <h3 class="mb-2">Education and training:</h3>
+
+    <div class="alert alert-danger" *ngIf="!dateCheck" role="alert">
+      Check your dates  
+    </div>
+  
+    <div formArrayName="education">
+        <div *ngFor="let ex of education.controls; let i=index" class="mb-2">
+            <label>Education {{i+1}}:</label>
+        <div [formGroupName]="i" class="row">
+          <div class="form-group col-md-6">
+            <label for="">From:</label>
+            <input formControlName="from" name="from" type="date" class="form-control rounded-5">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">To:</label>
+            <input formControlName="to" name="to" type="date" class="form-control rounded-5">
+          </div>
+  
+          <div class="form-group col-md-12">
+            <label for="">Title:</label>
+            <input formControlName="title" name="title" type="text" class="form-control rounded-5">
+          </div>
+  
+          <div class="form-group col-md-12">
+            <label for="">School/Company:</label>
+            <input formControlName="company" name="company" type="text" class="form-control rounded-5">
+          </div>
+  
+          <div class="form-group col-md-6">
+            <label for="">Country:</label>
+            <input formControlName="country" name="country" type="text" class="form-control rounded-5">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">City:</label>
+            <input formControlName="city" name="city" type="text" class="form-control rounded-5">
+          </div>
+  
+          <div class="form-group col-md-12">
+            <label for="">Description:</label>
+            <textarea formControlName="description" name="description" class="form-control rounded-5"></textarea>
+          </div>
+        </div>
+        <div class="col-md-2 offset-md-10">
+          <button class="btn btn-danger m-2 mx-auto" (click)="deleteEducation(i)">Delete</button>
+        </div>
+        <hr>
+      </div>
+      <button class="btn btn-warning m-2 " (click)="addEducation()">Add education or training</button>
+  
+    </div>
+    <div class="row">
+      <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!educationForm.valid">Save</button>
+    </div>
+  </form>

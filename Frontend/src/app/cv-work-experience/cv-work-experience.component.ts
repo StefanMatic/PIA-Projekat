@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { Student } from '../models/student';
+import { WorkExperience } from '../models/workExperience';
 
 @Component({
   selector: 'app-cv-work-experience',
@@ -16,6 +17,9 @@ export class CvWorkExperienceComponent implements OnInit {
   workForm = this.fb.group({
     experience: this.fb.array([this.createItem()])
   })
+
+  dateCheck: Boolean = true;
+  workEx: Array<WorkExperience> = []
 
   ngOnInit() {
     console.log(JSON.parse(localStorage.getItem("student")))
@@ -42,19 +46,31 @@ export class CvWorkExperienceComponent implements OnInit {
     this.experience.push(this.createItem())
   }
 
-  deleteExperience(index){
+  deleteExperience(index) {
     this.experience.removeAt(index)
   }
 
   onSubmit() {
+    this.dateCheck = true;
     if (this.workForm.valid) {
-      console.log("usaoo")
-      this.work.username = this.currentUser.username
-      this.work.second = true
+      this.workEx = this.workForm.value.experience as Array<WorkExperience>
+      for (let w of this.workEx) {
+        console.log(w.from)
+        console.log(w.to)
 
-      this.work.experience = this.workForm.value.experience 
+        if (w.from > w.to){
+          this.dateCheck = false;
+        }
+      }
+      if (this.dateCheck) {
+        console.log("usaoo")
+        this.work.username = localStorage.getItem("username")
+        this.work.second = true
 
-      console.log(this.work)
+        this.work.experience = this.workForm.value.experience
+
+        console.log(this.work)
+      }
     }
   }
 

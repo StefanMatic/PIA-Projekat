@@ -1,6 +1,10 @@
 <form [formGroup]="workForm" (ngSubmit)="onSubmit()">
   <h3 class="mb-2">Work experience:</h3>
 
+  <div class="alert alert-danger" *ngIf="!dateCheck" role="alert">
+    Check your dates  
+  </div>
+
   <div formArrayName="experience">
     <div *ngFor="let ex of experience.controls; let i=index" class="mb-2">
       <label>Experience {{i+1}}:</label>

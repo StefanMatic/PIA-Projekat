@@ -22,6 +22,8 @@ import { CvPersonalInformationComponent } from './cv-personal-information/cv-per
 
 import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 import { CvWorkExperienceComponent } from './cv-work-experience/cv-work-experience.component';
+import { CvEducationComponent } from './cv-education/cv-education.component';
+import { CvPersonalSkillsComponent } from './cv-personal-skills/cv-personal-skills.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CvWorkExperienceComponent } from './cv-work-experience/cv-work-experien
     CompanyListComponent,
     CVstudentFormComponent,
     CvPersonalInformationComponent,
-    CvWorkExperienceComponent
+    CvWorkExperienceComponent,
+    CvEducationComponent,
+    CvPersonalSkillsComponent
   ],
   imports: [
     BrowserModule,
