@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { Student } from '../models/student';
 import { Education } from '../models/education';
+import { CVStatus } from '../models/getCVStatus';
+import { GetEducation } from '../models/getEducation';
+import { CvService } from '../cv.service';
 
 @Component({
   selector: 'app-cv-education',
@@ -12,7 +15,11 @@ export class CvEducationComponent implements OnInit {
   currentUser: Student;
   myEducation: any = {};
 
-  constructor(private fb: FormBuilder) { }
+  i: number;
+  statusCV: CVStatus;
+  patcher: GetEducation;
+
+  constructor(private fb: FormBuilder, private CVservice: CvService) { }
 
   educationForm = this.fb.group({
     education: this.fb.array([this.createItem()])
@@ -23,9 +30,25 @@ export class CvEducationComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(JSON.parse(localStorage.getItem("student")))
-    this.currentUser = JSON.parse(localStorage.getItem("student"))
-  }
+    this.CVservice.getCV(localStorage.getItem("username"))
+    .subscribe(
+      (res:any) => {
+        this.patcher = res as GetEducation
+        this.statusCV = res as CVStatus
+
+        if (this.statusCV.third){
+
+          for (this.i = 0; this.i < this.patcher.education.length - 1; this.i++) {
+            this.addEducation()
+          }
+
+          this.educationForm.patchValue({
+            education: this.patcher.education
+          })
+        }
+      },
+      err => console.log(err)
+    )}
 
   get education() {
     return this.educationForm.get('education') as FormArray
@@ -68,9 +91,14 @@ export class CvEducationComponent implements OnInit {
         this.myEducation.username = localStorage.getItem("username")
         this.myEducation.third = true
 
-        this.myEducation.experience = this.educationForm.value.education
+        this.myEducation.education = this.educationForm.value.education
 
         console.log(this.myEducation)
+        console.log("saljemo dalje")
+        this.CVservice.updateCVThird(this.myEducation).subscribe(
+          res => console.log(res),
+          err => console.log(err)
+        )
       }
     }
   }

@@ -31,6 +31,7 @@ const storage = multer.diskStorage({
 });
 
 const User = require('../models/user')
+const CV = require('../models/cv')
 
 mongoose.connect(db, err => {
     if (err) {
@@ -118,7 +119,6 @@ router.get('/allCompanies', (req, res)=>{
 })
 
 router.post('/currentUser', (req, res)=>{
-    console.log(req.body)
     User.findOne({username: req.body.username}, (err, user)=>{
         if (err){
             console.log(err)
@@ -128,5 +128,53 @@ router.post('/currentUser', (req, res)=>{
         }
     })
 })
+
+
+//funkcije za CV
+router.post('/makeCV', (req, res)=>{
+    console.log("alooo")
+    let newCV = new CV({
+        username: req.body.username,
+        first: req.body.first,
+        second: req.body.second,
+        third: req.body.third,
+        forth: req.body.forth,
+        complete: req.body.complete
+    })
+    newCV.save((err, curiculam) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(curiculam)
+        }
+    })
+})
+
+router.post('/findCV', (req, res)=>{
+    console.log("adaf")
+    CV.findOne({username: req.body.username}, (err, curiculam)=>{
+        if (err){
+            console.log(err)
+        }
+        else{
+            res.json(curiculam)
+        }
+    })
+})
+
+router.post('/updateCV', (req, res)=>{
+    console.log("caoooo")
+    console.log(req.body)
+    CV.update({username: req.body.username}, req.body, (err, crc)=>{
+        if (err){
+            console.log(err)
+        }
+        else{
+            console.log(crc)
+        }
+    })
+})
+
 
 module.exports = router

@@ -74,7 +74,7 @@
     </div>
 
     <div formArrayName="digitalSkills">
-      <label>Job-related skills:</label>
+      <label>Digital skills:</label>
       <div class="row" *ngFor="let dig of digitalSkills.controls; let i=index">
         <div class="col-md-10 mt-1 mb-1">
           <input type="text" [formControlName]="i" class="form-control rounded-5">
@@ -89,6 +89,6 @@
   </div>
 
   <div class="row">
-    <button class="btn-primary btn mt-3 offset-md-5" type="submit" [disabled]="!personalSkillsForm.valid">Save</button>
+    <button class="btn-primary btn mx-auto col-md-2" type="submit" [disabled]="!personalSkillsForm.valid">Save</button>
   </div>
 </form>

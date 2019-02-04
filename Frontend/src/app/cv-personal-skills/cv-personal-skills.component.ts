@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { Student } from '../models/student';
+import { PersonalSkills } from '../models/personalSkills';
+import { CVStatus } from '../models/getCVStatus';
+import { CvService } from '../cv.service';
 
 
 @Component({
@@ -12,12 +15,52 @@ export class CvPersonalSkillsComponent implements OnInit {
   currentUser: Student;
   skills: any = {};
 
-  constructor(private fb: FormBuilder) { }
+  i: number;
+  statusCV: CVStatus;
+  patcher: PersonalSkills;
+
+  constructor(private fb: FormBuilder,  private CVservice: CvService) { }
 
   ngOnInit() {
-    console.log(JSON.parse(localStorage.getItem("student")))
-    this.currentUser = JSON.parse(localStorage.getItem("student"))
-  }
+    this.CVservice.getCV(localStorage.getItem("username"))
+    .subscribe(
+      (res:any) => {
+        this.patcher = res as PersonalSkills
+        this.statusCV = res as CVStatus
+
+        if (this.statusCV.forth){
+
+          for (this.i = 0; this.i < this.patcher.languages.length - 1; this.i++) {
+            this.addLanguage()
+          }
+          for (this.i = 0; this.i < this.patcher.comSkills.length - 1; this.i++) {
+            this.addComSkills()
+          }
+          for (this.i = 0; this.i < this.patcher.digitalSkills.length - 1; this.i++) {
+            this.addDigitalSkills()
+          }
+          for (this.i = 0; this.i < this.patcher.jobSkills.length - 1; this.i++) {
+            this.addJobSkills()
+          }
+          for (this.i = 0; this.i < this.patcher.organisationSkills.length - 1; this.i++) {
+            this.addOrganisationSkills()
+          }
+
+          this.personalSkillsForm.patchValue({
+            languageInfo:{
+              languages: this.patcher.languages
+            },
+            skillsInfo:{
+              comSkills: this.patcher.comSkills,
+              organisationSkills: this.patcher.organisationSkills,
+              jobSkills: this.patcher.jobSkills,
+              digitalSkills: this.patcher.digitalSkills
+            }
+          })
+        }
+      },
+      err => console.log(err)
+    )}
 
   personalSkillsForm = this.fb.group({
     languageInfo: this.fb.group({
@@ -114,6 +157,11 @@ export class CvPersonalSkillsComponent implements OnInit {
       this.skills.digitalSkills = this.personalSkillsForm.value.skillsInfo.digitalSkills
 
       console.log(this.skills)
+      console.log("saljemo dalje")
+      this.CVservice.updateCVForth(this.skills).subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
     }
   }
 }

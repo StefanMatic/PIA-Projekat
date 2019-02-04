@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { Student } from '../models/student';
+import { CVStatus } from '../models/getCVStatus';
+import { PersonalInfo } from '../models/personalInfo';
+import { CvService } from '../cv.service';
 
 
 @Component({
@@ -9,14 +12,57 @@ import { Student } from '../models/student';
   styleUrls: ['./cv-personal-information.component.css']
 })
 export class CvPersonalInformationComponent implements OnInit {
-  currentUser: Student;
+  statusCV: CVStatus;
+  patcher: PersonalInfo;
+  helper: any;
   personal: any = {};
+  i: number;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private CVservice: CvService) { }
 
   ngOnInit() {
-    console.log(JSON.parse(localStorage.getItem("student")))
-    this.currentUser = JSON.parse(localStorage.getItem("student"))
+    this.CVservice.getCV(localStorage.getItem("username"))
+      .subscribe(
+        (res: any) => {
+          this.patcher = res as PersonalInfo
+          this.statusCV = res as CVStatus
+
+          if (this.statusCV.first) {
+            for (this.i = 0; this.i < this.patcher.web.length - 1; this.i++) {
+              this.addWeb()
+            }
+
+            for (this.i = 0; this.i < this.patcher.number.length - 1; this.i++) {
+              this.addNumber()
+            }
+
+            for (this.i = 0; this.i < this.patcher.email.length - 1; this.i++) {
+              this.addEmail()
+            }
+
+            this.personalInfoForm.patchValue({
+              personalInfo: {
+                name: this.patcher.name,
+                lastname: this.patcher.lastname,
+                sex: this.patcher.sex,
+                dateOfBirth: this.patcher.dateOfBirth
+              },
+              locationInfo: {
+                address: this.patcher.name,
+                country: this.patcher.country,
+                city: this.patcher.city,
+                postalCode: this.patcher.postalCode
+              },
+              contactInfo: {
+                number: this.patcher.number,
+                email: this.patcher.email,
+                web: this.patcher.web
+              }
+            })
+          }
+        },
+        err => console.log(err)
+      )
   }
 
   personalInfoForm = this.fb.group({
@@ -72,13 +118,13 @@ export class CvPersonalInformationComponent implements OnInit {
     this.web.push(this.fb.control('', Validators.required))
   }
 
-  deleteNumber(index){
+  deleteNumber(index) {
     this.number.removeAt(index)
   }
-  deleteEmail(index){
+  deleteEmail(index) {
     this.email.removeAt(index)
   }
-  deleteWeb(index){
+  deleteWeb(index) {
     this.web.removeAt(index)
   }
 
@@ -102,7 +148,11 @@ export class CvPersonalInformationComponent implements OnInit {
       this.personal.email = this.personalInfoForm.value.contactInfo.email
       this.personal.web = this.personalInfoForm.value.contactInfo.web
 
-      console.log(this.personal)
+      console.log("Saljemo dalje")
+      this.CVservice.updateCVFirts(this.personal).subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
     }
   }
 

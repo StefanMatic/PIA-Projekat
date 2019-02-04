@@ -24,6 +24,7 @@ import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 import { CvWorkExperienceComponent } from './cv-work-experience/cv-work-experience.component';
 import { CvEducationComponent } from './cv-education/cv-education.component';
 import { CvPersonalSkillsComponent } from './cv-personal-skills/cv-personal-skills.component';
+import { CvService } from './cv.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { CvPersonalSkillsComponent } from './cv-personal-skills/cv-personal-skil
     NgMultiSelectDropDownModule.forRoot(),
     DlDateTimePickerDateModule
   ],
-  providers: [AuthService, CompanyListServiceService, StudentService],
+  providers: [AuthService, CompanyListServiceService, StudentService, CvService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
