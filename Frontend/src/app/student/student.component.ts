@@ -58,17 +58,6 @@ export class StudentComponent implements OnInit {
       err => console.log(err)
     )
 
-    if (this.toMake){
-      this.CVserver.setBaseCV(localStorage.getItem("username")).subscribe(
-        (res)=>{
-          console.log("napravljen novi")
-          console.log(res)
-          localStorage.setItem("cv", res)
-        },
-        err=>console.log(err)
-      )
-    }
-
     this.router.navigate(['/makeCV'])
   }
 }
