@@ -1,0 +1,39 @@
+<div *ngIf="allOffers.length">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>All Offers:</h2>
+    </div>
+  </div>
+  <div class="row mt-4" *ngFor="let offer of allOffers">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mb-3 mx-auto pt-2">
+        <div class="card-body">
+          <h3 class="card-title text-center">{{offer.name}}</h3>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h5>Description:</h5>
+              <div class="ml-3">
+                {{offer.description}}
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-secondary" (click)="openDetails(offer._id)">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row mt-5" *ngIf="!allOffers.length">
+  <div class="col-md-8 mx-auto">
+    <h4>
+      There are no open offers at this moment
+    </h4>
+  </div>
+</div>

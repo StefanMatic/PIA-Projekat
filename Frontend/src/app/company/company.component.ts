@@ -16,7 +16,6 @@ export class CompanyComponent implements OnInit {
   allCompanyOffers: Array<Offer> = []
 
   constructor(private studentService: StudentService,
-    private CVserver: CvService,
     private offerService: CompanyOfferService,
     private router: Router) { }
 
@@ -50,7 +49,6 @@ export class CompanyComponent implements OnInit {
     console.log(info)
     localStorage.setItem("offer", info as string)
     this.router.navigate(['/offerDetails'])
-
   }
 
 }

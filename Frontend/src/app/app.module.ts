@@ -28,6 +28,8 @@ import { CvService } from './cv.service';
 import { CompanyOfferComponent } from './company-offer/company-offer.component';
 import { CompanyOfferService } from './company-offer.service';
 import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
+import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
+import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { CompanyOfferDetailsComponent } from './company-offer-details/company-of
     CvEducationComponent,
     CvPersonalSkillsComponent,
     CompanyOfferComponent,
-    CompanyOfferDetailsComponent
+    CompanyOfferDetailsComponent,
+    StudentOffersSearchComponent,
+    StudentCompanySearchComponent
   ],
   imports: [
     BrowserModule,

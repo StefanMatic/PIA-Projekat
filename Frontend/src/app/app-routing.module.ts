@@ -9,6 +9,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.component';
 import { CompanyOfferComponent } from './company-offer/company-offer.component';
 import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
+import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch:'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:'listCompanies', component:CompanyListComponent},
   {path:'makeCV', component: CVstudentFormComponent},
   {path:'makeOffer', component: CompanyOfferComponent},
-  {path:'offerDetails', component: CompanyOfferDetailsComponent}
+  {path:'offerDetails', component: CompanyOfferDetailsComponent},
+  {path:'serachOffers', component: StudentOffersSearchComponent}
 ];
 
 @NgModule({
