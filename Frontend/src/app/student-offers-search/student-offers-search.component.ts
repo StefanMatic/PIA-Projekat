@@ -13,7 +13,7 @@ export class StudentOffersSearchComponent implements OnInit {
   startAllOffers: Array<Offer> = [];
 
   //promenljive za rad sa pretragom
-  helperArray:Array<Offer> = [];
+  helperArray: Array<Offer> = [];
   companySearch: String = '';
   offerSearch: String = '';
   isJob: Boolean = false;
@@ -29,18 +29,26 @@ export class StudentOffersSearchComponent implements OnInit {
         console.log(res)
         this.startAllOffers = res
         this.allOffers = res
-        this.helperArray = []
         this.checkOffersDate()
       },
       (err) => console.log(err)
     )
   }
 
+  checkFoundDates() {
+    this.helperArray = this.allOffers;
+    this.allOffers = []
+    for (let offer of this.helperArray) {
+      if (Date.parse(offer.deadlineDate.toString()) > Date.now())
+        this.allOffers.push(offer)
+    }
+  }
+
   checkOffersDate() {
     console.log(this.allOffers)
-    this.helperArray = this.allOffers;
-    console.log(this.helperArray)
-    for (let offer of this.helperArray) {
+    this.allOffers = [];
+
+    for (let offer of this.startAllOffers) {
       if (Date.parse(offer.deadlineDate.toString()) > Date.now())
         this.allOffers.push(offer)
     }
@@ -102,8 +110,7 @@ export class StudentOffersSearchComponent implements OnInit {
       //Proslo je sve provere i mozemo da ga ubacimo
       this.allOffers.push(offer)
     }
-
-    this.checkOffersDate()
+    this.checkFoundDates()
   }
 
 }
