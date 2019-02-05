@@ -8,6 +8,8 @@ export class CompanyOfferService {
   private _makeOffer = "http://localhost:4000/api/makeOffer"
   private _allOffers = "http://localhost:4000/api/allOffers"
   private _companyOffers = "http://localhost:4000/api/companyOffers"
+  private _findOffer = "http://localhost:4000/api/findOffer"
+
 
   constructor(private http: HttpClient) { }
 
@@ -39,5 +41,15 @@ export class CompanyOfferService {
     }
 
     return this.http.post<any>(this._companyOffers, offerData)
+  }
+
+  findOffer(findId:String){
+    console.log("find offer")
+    console.log(findId)
+    const offerData = {
+      id: findId
+    }
+    
+    return this.http.post<any>(this._findOffer, offerData)
   }
 }

@@ -197,6 +197,18 @@ router.post('/makeOffer', (req, res)=>{
     })
 })
 
+router.post('/findOffer', (req, res)=>{
+    
+    Offer.findById(req.body.id, (err, offers)=>{
+        if (err)
+            console.log(err)
+        else {
+            console.log(offers)
+            res.json(offers)
+        }
+    })
+})
+
 router.get('/allOffers', (req, res)=>{
     Offer.find({}, (err, offers)=>{
         if (err)

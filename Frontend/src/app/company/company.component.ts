@@ -38,11 +38,19 @@ export class CompanyComponent implements OnInit {
         (res: Array<Offer>) => {
           console.log(res)
           this.allCompanyOffers = res
+          console.log(res[0]._id)
         },
         err => {
           console.log(err)
         }
       )
+  }
+
+  openDetails(info:String){
+    console.log(info)
+    localStorage.setItem("offer", info as string)
+    this.router.navigate(['/offerDetails'])
+
   }
 
 }

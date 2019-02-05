@@ -2,6 +2,7 @@ import { Time } from '@angular/common';
 import { SelectedItemsElements } from './selectedItemsElements';
 
 export interface Offer {
+    _id:String,
     username:String,
     name:String,
     description: String,
