@@ -1,3 +1,44 @@
-<p>
-  student-company-search works!
-</p>
+<div class="row" *ngFor="let company of allCompanies">
+  <div class="col-md-8 offset-md-2">
+    <div class="card mb-3 mx-auto pt-2">
+      <img class="card-img-top img-fluid image-logo mx-auto" [src]="company.image" alt="company.name">
+      <div class="card-body">
+        <h3 class="card-title text-center">{{company.name}}</h3>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h5>Location:</h5>
+            <div class="ml-3">
+              <h6 class="be-inline">City:</h6>
+              <p class="be-inline"> {{company.city}}</p>
+            </div>
+            <div class="ml-3">
+              <h6 class="be-inline">Address:</h6>
+              <p class="be-inline"> {{company.address}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Email:</h5>
+              <p class="be-inline"> {{company.email}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Number of employees:</h5>
+              <p class="be-inline"> {{company.numOfEmployees}}</p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-secondary" (click)="openDetails(company.username)">Details</button>
+      </div>
+    </div>
+  </div>
+</div>

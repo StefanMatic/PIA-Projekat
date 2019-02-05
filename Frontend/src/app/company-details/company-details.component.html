@@ -1,0 +1,88 @@
+<div class="row mt-4 mb-4 p-4">
+  <div class="col-md-8 white-background mx-auto p-3">
+    <div class="row">
+      <div class="text-center col-md-12">
+        <img class="img-fluid image-logo mx-auto" [src]="company.image" alt="company.name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3>{{company.name}}</h3>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h5>Location:</h5>
+            <div class="ml-3">
+              <h6 class="be-inline">City:</h6>
+              <p class="be-inline"> {{company.city}}</p>
+            </div>
+            <div class="ml-3">
+              <h6 class="be-inline">Address:</h6>
+              <p class="be-inline"> {{company.address}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Email:</h5>
+              <p class="be-inline"> {{company.email}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Web:</h5>
+              <p class="be-inline"> {{company.web}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">PIB:</h5>
+              <p class="be-inline"> {{company.pib}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Number of employees:</h5>
+              <p class="be-inline"> {{company.numOfEmployees}}</p>
+            </div>
+          </li>
+
+
+          <li class="list-group-item">
+
+            <div>
+              <h5 class="be-inline">Activities:</h5>
+              <ul>
+                <li *ngFor="let activiti of company.activities">
+                  {{activiti.item_text}}
+                </li>
+              </ul>
+            </div>
+
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Speciality:</h5>
+              <p class="be-inline"> {{company.speciality}}</p>
+            </div>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

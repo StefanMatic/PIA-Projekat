@@ -12,7 +12,6 @@ import { StudentService } from '../student.service';
 export class CompanyOfferDetailsComponent implements OnInit {
   myOffer:Offer;
   offerId:string;
-  myCompany:Company
 
   constructor(private offerService: CompanyOfferService,
     private findService: StudentService) { }

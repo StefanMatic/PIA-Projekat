@@ -10,18 +10,22 @@ import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.componen
 import { CompanyOfferComponent } from './company-offer/company-offer.component';
 import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
 import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
+import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch:'full'},
-  {path:'login', component: LoginComponent},
-  {path:'registration', component: RegistrationComponent},
-  {path:'student', component: StudentComponent},
-  {path:'company', component: CompanyComponent},
-  {path:'listCompanies', component:CompanyListComponent},
-  {path:'makeCV', component: CVstudentFormComponent},
-  {path:'makeOffer', component: CompanyOfferComponent},
-  {path:'offerDetails', component: CompanyOfferDetailsComponent},
-  {path:'serachOffers', component: StudentOffersSearchComponent}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'student', component: StudentComponent },
+  { path: 'company', component: CompanyComponent },
+  { path: 'listCompanies', component: CompanyListComponent },
+  { path: 'makeCV', component: CVstudentFormComponent },
+  { path: 'makeOffer', component: CompanyOfferComponent },
+  { path: 'offerDetails', component: CompanyOfferDetailsComponent },
+  { path: 'companyDetails', component: CompanyDetailsComponent },
+  { path: 'searchOffers', component: StudentOffersSearchComponent },
+  { path: 'searchCompany', component: StudentCompanySearchComponent }
 ];
 
 @NgModule({

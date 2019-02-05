@@ -30,6 +30,7 @@ import { CompanyOfferService } from './company-offer.service';
 import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
 import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
 import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { StudentCompanySearchComponent } from './student-company-search/student-
     CompanyOfferComponent,
     CompanyOfferDetailsComponent,
     StudentOffersSearchComponent,
-    StudentCompanySearchComponent
+    StudentCompanySearchComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,
