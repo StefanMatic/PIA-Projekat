@@ -1,3 +1,39 @@
+<div class="row mb-3">
+  <div class="col-md-1 offset-md-1">
+    <h3>Search:</h3>
+  </div>
+</div>
+
+<div class="row mb-3">
+
+  <div class="col-md-3">
+    <input type="text" name="name" [(ngModel)]="offerSearch" class="form-control rounded-5" placeholder="Search by offer name">
+  </div>
+
+  <div class="col-md-3">
+    <input type="text" name="city" [(ngModel)]="companySearch" class="form-control rounded-5" placeholder="Search by company name">
+  </div>
+
+  <div class="col-md-3 text-center pt-1">
+      <div class="custom-control custom-checkbox be-inline mr-2">
+        <input type="checkbox" name="isJob" [(ngModel)]="isJob" class="custom-control-input" id="customCheck1">
+        <label class="custom-control-label" for="customCheck1">Job</label>
+      </div>
+      <div class="custom-control custom-checkbox be-inline">
+        <input type="checkbox" name="isInternship" [(ngModel)]="isInternship" class="custom-control-input" id="customCheck2">
+        <label class="custom-control-label" for="customCheck2">Internship</label>
+      </div>
+    </div>
+
+  <div class="col-md-1">
+    <button class="btn btn-warning use-col" (click)="onSearch()">Search</button>
+  </div>
+
+  <div class="col-md-1">
+    <button class="btn btn-secondary use-col" (click)="onReset()">Reset</button>
+  </div>
+</div>
+
 <div *ngIf="allOffers.length">
   <div class="row">
     <div class="col-md-12 text-center">
@@ -11,6 +47,12 @@
           <h3 class="card-title text-center">{{offer.name}}</h3>
 
           <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <h5>Company:</h5>
+                  <div class="ml-3">
+                    {{offer.username}}
+                  </div>
+                </li>
             <li class="list-group-item">
               <h5>Description:</h5>
               <div class="ml-3">
