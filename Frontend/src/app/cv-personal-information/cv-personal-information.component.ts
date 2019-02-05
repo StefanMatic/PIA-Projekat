@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { Student } from '../models/student';
 import { CVStatus } from '../models/getCVStatus';
 import { PersonalInfo } from '../models/personalInfo';
 import { CvService } from '../cv.service';

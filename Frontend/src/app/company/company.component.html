@@ -1,7 +1,3 @@
-<p>
-  company works!
-</p>
-
 <div class="row mt-3">
   <div class="col-md-3 text-center mt-3">
     <img [src]="currentUser.image" [alt]="currentUser.username" class="img-fluid rounded-circle image-profile">
@@ -45,15 +41,53 @@
         <h6 class="be-inline">Speciality:</h6>
         <p class="be-inline"> {{currentUser.speciality}}</p>
       </li>
-      
+
     </ul>
   </div>
 </div>
 <div class="row mt-4">
-  <div class="col-md-2 text-center offset-md-3">
-    <button class="btn btn-info btn-lg">Make offer</button>
+  <div class="col-md-8 text-center mx-auto">
+    <button class="btn btn-info btn-lg mr-3">Make offer</button>
+    <button class="btn btn-info btn-lg">Change password</button>
   </div>
-  <div class="col-md-3 text-center">
-      <button class="btn btn-info btn-lg">Change password</button>
+</div>
+
+
+<div *ngIf="allCompanyOffers.length">
+  <hr>
+  <div class="col-md-12 text-center m-3">
+    <h2>Your offers:</h2>
+  </div>
+  <div class="row mt-4" *ngFor="let offer of allCompanyOffers">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mb-3 mx-auto pt-2">
+        <div class="card-body">
+          <h3 class="card-title text-center">{{offer.name}}</h3>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h5>Description:</h5>
+              <div class="ml-3">
+                {{offer.description}}
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="card-footer text-center">
+          <h5><a>detaljnije</a></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row mt-5" *ngIf="!allCompanyOffers.length">
+  <div class="col-md-8 mx-auto">
+    <h4>
+      You haven't made any offers yet! Click <a routerLink="/makeOffer">here</a> to start!
+    </h4>
   </div>
 </div>

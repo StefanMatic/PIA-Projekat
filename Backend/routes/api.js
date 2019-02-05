@@ -32,6 +32,7 @@ const storage = multer.diskStorage({
 
 const User = require('../models/user')
 const CV = require('../models/cv')
+const Offer = require('../models/offer')
 
 mongoose.connect(db, err => {
     if (err) {
@@ -129,10 +130,10 @@ router.post('/currentUser', (req, res)=>{
     })
 })
 
-
+//==================================
 //funkcije za CV
+//==================================
 router.post('/makeCV', (req, res)=>{
-    console.log("alooo")
     let newCV = new CV({
         username: req.body.username,
         first: req.body.first,
@@ -152,7 +153,6 @@ router.post('/makeCV', (req, res)=>{
 })
 
 router.post('/findCV', (req, res)=>{
-    console.log("adaf")
     CV.findOne({username: req.body.username}, (err, curiculam)=>{
         if (err){
             console.log(err)
@@ -164,7 +164,6 @@ router.post('/findCV', (req, res)=>{
 })
 
 router.post('/updateCV', (req, res)=>{
-    console.log("caoooo")
     console.log(req.body)
     CV.update({username: req.body.username}, req.body, (err, crc)=>{
         if (err){
@@ -175,6 +174,50 @@ router.post('/updateCV', (req, res)=>{
         }
     })
 })
+//=======================================
+//funkcije za kompanije
+//=======================================
+
+router.post('/makeOffer', (req, res)=>{
+    let newOffer = new Offer({
+        username: req.body.username,
+        name: req.body.name,
+        description: req.body.description,
+        deadlineDate: req.body.deadlineDate,
+        deadlineTime: req.body.deadlineTime,
+        typeOfJob: req.body.typeOfJob
+    })
+    newOffer.save((err, myOffer) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(myOffer)
+        }
+    })
+})
+
+router.get('/allOffers', (req, res)=>{
+    Offer.find({}, (err, offers)=>{
+        if (err)
+            console.log(err)
+        else 
+            res.json(offers)
+    })
+})
+
+router.post('/companyOffers', (req, res)=>{
+    Offer.find({username: req.body.username}, (err, offers)=>{
+        if (err){
+            console.log(err)
+        }
+        else{
+            res.json(offers)
+        }
+    })
+})
+//===========================================
+//===========================================
 
 
 module.exports = router

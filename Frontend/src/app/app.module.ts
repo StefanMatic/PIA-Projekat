@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { CompanyFormComponent } from './company-form/company-form.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CompanyComponent } from './company/company.component';
 import { StudentComponent } from './student/student.component';
@@ -25,6 +25,9 @@ import { CvWorkExperienceComponent } from './cv-work-experience/cv-work-experien
 import { CvEducationComponent } from './cv-education/cv-education.component';
 import { CvPersonalSkillsComponent } from './cv-personal-skills/cv-personal-skills.component';
 import { CvService } from './cv.service';
+import { CompanyOfferComponent } from './company-offer/company-offer.component';
+import { CompanyOfferService } from './company-offer.service';
+import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { CvService } from './cv.service';
     CvPersonalInformationComponent,
     CvWorkExperienceComponent,
     CvEducationComponent,
-    CvPersonalSkillsComponent
+    CvPersonalSkillsComponent,
+    CompanyOfferComponent,
+    CompanyOfferDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,7 @@ import { CvService } from './cv.service';
     NgMultiSelectDropDownModule.forRoot(),
     DlDateTimePickerDateModule
   ],
-  providers: [AuthService, CompanyListServiceService, StudentService, CvService],
+  providers: [AuthService, CompanyListServiceService, StudentService, CvService, CompanyOfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

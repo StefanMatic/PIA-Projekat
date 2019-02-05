@@ -1,5 +1,6 @@
 .alignText{
-    vertical-align: 20%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .be-inline{

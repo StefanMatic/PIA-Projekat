@@ -7,6 +7,7 @@ import { StudentComponent } from './student/student.component';
 import { CompanyComponent } from './company/company.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CVstudentFormComponent } from './cvstudent-form/cvstudent-form.component';
+import { CompanyOfferComponent } from './company-offer/company-offer.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch:'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'student', component: StudentComponent},
   {path:'company', component: CompanyComponent},
   {path:'listCompanies', component:CompanyListComponent},
-  {path:'makeCV', component: CVstudentFormComponent}
+  {path:'makeCV', component: CVstudentFormComponent},
+  {path:'makeOffer', component: CompanyOfferComponent}
 ];
 
 @NgModule({
