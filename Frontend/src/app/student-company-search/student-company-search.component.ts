@@ -13,6 +13,9 @@ export class StudentCompanySearchComponent implements OnInit {
   allCompanies: Array<Company> = []
   startArrayOfCompanies: Array<Company> = []
 
+  //promenljive za rad sa pretragom
+  companySearch: String = ""
+
   constructor(private companyListService: CompanyListServiceService,
     private router: Router) { }
 
@@ -28,11 +31,26 @@ export class StudentCompanySearchComponent implements OnInit {
       )
   }
 
-  openDetails(info:String){
+  openDetails(info: String) {
     console.log(info)
     localStorage.setItem("company", info as string)
     this.router.navigate(['/companyDetails'])
-
   }
+
+  onReset() {
+    this.companySearch = '';
+    this.allCompanies = this.startArrayOfCompanies
+  }
+
+  onSearch() {
+    this.allCompanies = [];
+    for (let company of this.startArrayOfCompanies) {
+      if ((this.companySearch === '' || company.name.toLowerCase().indexOf(this.companySearch.toLowerCase()) !== -1)) {
+        this.allCompanies.push(company)
+      }
+
+    }
+  }
+
 
 }

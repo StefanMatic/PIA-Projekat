@@ -1,3 +1,24 @@
+<div class="row mb-3">
+    <div class="col-md-1 offset-md-1">
+      <h3>Search:</h3>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+  
+    <div class="col-md-4 mx-auto">
+      <input type="text" name="city" [(ngModel)]="companySearch" class="form-control rounded-5" placeholder="Search by company name">
+    </div>
+  
+    <div class="col-md-2">
+      <button class="btn btn-warning use-col" (click)="onSearch()">Search</button>
+    </div>
+  
+    <div class="col-md-2">
+      <button class="btn btn-secondary use-col" (click)="onReset()">Reset</button>
+    </div>
+  </div>
+
 <div class="row" *ngFor="let company of allCompanies">
   <div class="col-md-8 offset-md-2">
     <div class="card mb-3 mx-auto pt-2">
