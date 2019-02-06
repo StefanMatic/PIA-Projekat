@@ -31,6 +31,7 @@ import { CompanyOfferDetailsComponent } from './company-offer-details/company-of
 import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
 import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { ApplicationService } from './application.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,13 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
     NgMultiSelectDropDownModule.forRoot(),
     DlDateTimePickerDateModule
   ],
-  providers: [AuthService, CompanyListServiceService, StudentService, CvService, CompanyOfferService],
+  providers: [
+    AuthService, 
+    CompanyListServiceService, 
+    StudentService, 
+    CvService, 
+    CompanyOfferService,
+    ApplicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

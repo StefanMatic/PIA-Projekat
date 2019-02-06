@@ -11,6 +11,11 @@ const MIME_TYPE_MAP = {
     "image/jpg": "jpg"
 };
 
+const MIME_TYPE_MAP_FILE = {
+    "application/msword": "docx",
+    "application/pdf": "pdf"
+};
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const isValid = MIME_TYPE_MAP[file.mimetype];
@@ -30,9 +35,28 @@ const storage = multer.diskStorage({
     }
 });
 
+const storeFile = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const isValid = MIME_TYPE_MAP_FILE[file.mimetype];
+        let error = new Error("Invalid mime type");
+        if (isValid) {
+            error = null;
+        }
+        cb(error, './uploads');
+    },
+    filename: function (req, file, cb) {
+        const name = file.originalname
+        .toLowerCase()
+        .split(" ")
+        .join("-");
+    const ext = MIME_TYPE_MAP_FILE[file.mimetype];
+    cb(null, name + "-" + Date.now() + "." + ext);    }
+});
+
 const User = require('../models/user')
 const CV = require('../models/cv')
 const Offer = require('../models/offer')
+const Application = require('../models/application')
 
 mongoose.connect(db, err => {
     if (err) {
@@ -48,7 +72,7 @@ router.get('/', (req, res) => {
     res.send("From Api router")
 })
 
-router.post('/registerCompany', multer({storage: storage}).single("image"),(req, res) => {
+router.post('/registerCompany', multer({ storage: storage }).single("image"), (req, res) => {
     const url = req.protocol + "://" + req.get("host");
     let companyData = new User({
         role: req.body.role,
@@ -75,7 +99,7 @@ router.post('/registerCompany', multer({storage: storage}).single("image"),(req,
     })
 })
 
-router.post('/registerStudent', multer({storage: storage}).single("image"),(req, res) => {
+router.post('/registerStudent', multer({ storage: storage }).single("image"), (req, res) => {
     const url = req.protocol + "://" + req.get("host");
     let studentData = new User({
         role: req.body.role,
@@ -110,21 +134,21 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.get('/allCompanies', (req, res)=>{
-    User.find({role:"1"}, (err, companies)=>{
+router.get('/allCompanies', (req, res) => {
+    User.find({ role: "1" }, (err, companies) => {
         if (err)
             console.log(err)
-        else 
+        else
             res.json(companies)
     })
 })
 
-router.post('/currentUser', (req, res)=>{
-    User.findOne({username: req.body.username}, (err, user)=>{
-        if (err){
+router.post('/currentUser', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, user) => {
+        if (err) {
             console.log(err)
         }
-        else{
+        else {
             res.json(user)
         }
     })
@@ -133,7 +157,7 @@ router.post('/currentUser', (req, res)=>{
 //==================================
 //funkcije za CV
 //==================================
-router.post('/makeCV', (req, res)=>{
+router.post('/makeCV', (req, res) => {
     let newCV = new CV({
         username: req.body.username,
         first: req.body.first,
@@ -152,24 +176,24 @@ router.post('/makeCV', (req, res)=>{
     })
 })
 
-router.post('/findCV', (req, res)=>{
-    CV.findOne({username: req.body.username}, (err, curiculam)=>{
-        if (err){
+router.post('/findCV', (req, res) => {
+    CV.findOne({ username: req.body.username }, (err, curiculam) => {
+        if (err) {
             console.log(err)
         }
-        else{
+        else {
             res.json(curiculam)
         }
     })
 })
 
-router.post('/updateCV', (req, res)=>{
+router.post('/updateCV', (req, res) => {
     console.log(req.body)
-    CV.update({username: req.body.username}, req.body, (err, crc)=>{
-        if (err){
+    CV.update({ username: req.body.username }, req.body, (err, crc) => {
+        if (err) {
             console.log(err)
         }
-        else{
+        else {
             console.log(crc)
         }
     })
@@ -178,7 +202,7 @@ router.post('/updateCV', (req, res)=>{
 //funkcije za kompanije
 //=======================================
 
-router.post('/makeOffer', (req, res)=>{
+router.post('/makeOffer', (req, res) => {
     let newOffer = new Offer({
         username: req.body.username,
         name: req.body.name,
@@ -197,9 +221,9 @@ router.post('/makeOffer', (req, res)=>{
     })
 })
 
-router.post('/findOffer', (req, res)=>{
-    
-    Offer.findById(req.body.id, (err, offers)=>{
+router.post('/findOffer', (req, res) => {
+
+    Offer.findById(req.body.id, (err, offers) => {
         if (err)
             console.log(err)
         else {
@@ -209,25 +233,84 @@ router.post('/findOffer', (req, res)=>{
     })
 })
 
-router.get('/allOffers', (req, res)=>{
-    Offer.find({}, (err, offers)=>{
+router.get('/allOffers', (req, res) => {
+    Offer.find({}, (err, offers) => {
         if (err)
             console.log(err)
-        else 
+        else
             res.json(offers)
     })
 })
 
-router.post('/companyOffers', (req, res)=>{
-    Offer.find({username: req.body.username}, (err, offers)=>{
-        if (err){
+router.post('/companyOffers', (req, res) => {
+    Offer.find({ username: req.body.username }, (err, offers) => {
+        if (err) {
             console.log(err)
         }
-        else{
+        else {
             res.json(offers)
         }
     })
 })
+//===========================================
+//Rad sa aplikacijama
+//===========================================
+router.post('/apply', (req, res) => {
+    let newApplication = new Application({
+        idOffer: req.body.idOffer,
+        username: req.body.username,
+        status: req.body.status
+    })
+    newApplication.save((err, myOffer) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(myOffer)
+        }
+    })
+})
+
+router.post('/sendCoverLetter', (req, res) => {
+    Application.update({ idOffer: req.body.idOffer, username: req.body.username },
+        req.body,
+        (err, app) => {
+            if (err)
+                console.log(err)
+            else
+                console.log(app)
+        })
+})
+
+router.post('/sendCoverLetterPDF', multer({ storage: storeFile }).single("coverLetterPDF"), (req, res) => {
+    const url = req.protocol + "://" + req.get("host");
+    const applicationData = {
+        coverLetterPDF: url + "/uploads/" + req.file.filename
+    }
+    Application.update({ idOffer: req.body.idOffer, username: req.body.username },
+        applicationData,
+        (err, app) => {
+            if (err) {
+                console.log(err)
+                return res.status(501).json({ error: err });
+            }
+            //do all database record saving activity
+            return res.json({ originalname: req.file.originalname, uploadname: req.file.filename });
+        })
+
+})
+
+router.post('/updateApplicationStatus', (req, res) => {
+    Application.update({ idOffer: req.body.idOffer, username: req.body.username },
+        req.body,
+        (err, app) => {
+            if (err)
+                console.log(err)
+            else
+                console.log(app)
+        })
+})
+
 //===========================================
 //===========================================
 

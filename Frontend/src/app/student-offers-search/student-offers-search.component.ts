@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./student-offers-search.component.css']
 })
 export class StudentOffersSearchComponent implements OnInit {
+  //promenljive za prilagodavanje Frontend-a
+  currentUserRole:String;
+
   allOffers: Array<Offer> = [];
   startAllOffers: Array<Offer> = [];
 

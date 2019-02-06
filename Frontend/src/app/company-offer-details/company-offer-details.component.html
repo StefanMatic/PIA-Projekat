@@ -6,6 +6,14 @@
         <h3>{{myOffer.name}}</h3>
       </div>
     </div>
+    <hr>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h5>Company:</h5>
+        <p class="nice-text">{{myOffer.username}}</p>
+      </div>
+    </div>
+    <hr>
     <div class="row mt-3">
       <div class="col-md-12">
         <h5>Description:</h5>
@@ -15,12 +23,12 @@
     <hr>
     <div class="row">
       <div class="col-md-12">
-          <h5>Type of job:</h5>
-          <ul class="nice-text">
-            <li *ngFor="let type of myOffer.typeOfJob">
-              {{type.item_text}}
-            </li>
-          </ul>
+        <h5>Type of job:</h5>
+        <ul class="nice-text">
+          <li *ngFor="let type of myOffer.typeOfJob">
+            {{type.item_text}}
+          </li>
+        </ul>
       </div>
     </div>
     <hr>
@@ -30,5 +38,62 @@
         <p class="nice-text">{{myOffer.deadlineDate}}; {{myOffer.deadlineTime}}</p>
       </div>
     </div>
+
+    <div class="col-md-12 mx-auto text-center mb-3" *ngIf="currentUserRole === '0'">
+      <button class="btn btn-warning" (click)="showApplyForm()">Apply</button>
+    </div>
+    <div *ngIf="applyFormShow">
+      <div class="col-md-12 mx-auto text-center mt-3">
+        <h4 *ngIf="toMake">You still don't have a CV ready! <a routerLink="/makeCV">Click</a> here to start!</h4>
+        <h4 *ngIf="!toMake">You are all ready to apply! <a routerLink="/makeCV">Click</a> here to double check your CV.</h4>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="">Cover letter:</label>
+        <textarea class="form-control rounded-5" [(ngModel)]="coverLetterText"></textarea>
+      </div>
+      <form [formGroup]="coverLetForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="">Upload your cover letter:</label>
+            <div>
+              <input name="coverLetterPDF" type="file" (change)="fileSelected($event)">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="col-md-12 mx-auto text-center">
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+      </div>
+      <!--      <div class="row card">
+          <div class="col-sm-12">
+              <h4>Upload Section</h4>
+              <div id="fileSelector">
+                  <input type="file" name="fileUplaod" id="fileUpload"
+                  multiple ng2FileSelect [uploader]="uploader">
+              </div>
+              <div>
+                  <div class="row uploadList" *ngFor="let item of uploader.queue">
+                      <div class="col-sm-4">{{item.file.name}}</div>
+                      <div class="col-sm-4">
+                          <div class="progress">
+                              <div class="progress-bar bg-success" 
+                              [ngStyle]="{'width':item.progress+'%'}"></div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                              <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
+                              <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
+                      </div>
+                  </div>                        
+              </div>
+              <div class="row" *ngIf="uploader?.queue?.length > 0">
+                      <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
+              </div>
+          </div>                
+      </div>-->
+
+    </div>
+
   </div>
+
 </div>

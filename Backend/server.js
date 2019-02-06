@@ -10,6 +10,8 @@ app.use(cors())
 
 app.use(bodyParser.json())
 app.use("/images", express.static(path.join("./images")));
+app.use("/uploads", express.static(path.join("./uploads")));
+
 app.use('/api', api)
 
 app.get('/', function(req, res){

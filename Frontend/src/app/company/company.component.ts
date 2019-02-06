@@ -12,7 +12,7 @@ import { CompanyOfferService } from '../company-offer.service';
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-  currentUser: Company;
+    currentUser: Company;
   allCompanyOffers: Array<Offer> = []
 
   constructor(private studentService: StudentService,
