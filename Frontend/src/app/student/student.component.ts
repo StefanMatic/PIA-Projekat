@@ -36,14 +36,11 @@ export class StudentComponent implements OnInit {
     .subscribe(
       (res) => {
         if (res) {
-          console.log("vec postoji")
-
           this.toMake = false
           localStorage.setItem("cv", JSON.stringify(res));
           console.log(JSON.stringify(res))
         }
         else {
-          console.log("moramo da pravimo")
           this.toMake = true;
           this.CVserver.setBaseCV(localStorage.getItem("username")).subscribe(
             (res)=>{

@@ -81,11 +81,11 @@
             <input type="text" formControlName="phone" class="form-control rounded-5">
           </div>
           <div class="col-md-2">
-              <button class="btn btn-danger form-control" (click)="deleteNumber(i)">Delete</button>
+              <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteNumber(i)">Delete</button>
             </div>
         </div>
       </div>
-      <button class="btn btn-warning m-2 " (click)="addNumber()">Add number</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2 " (click)="addNumber()">Add number</button>
     </div>
 
     <div formArrayName="email">
@@ -95,10 +95,10 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-            <button class="btn btn-danger form-control" (click)="deleteEmail(i)">Delete</button>
+            <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteEmail(i)">Delete</button>
           </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addEmail()">Add email</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addEmail()">Add email</button>
     </div>
 
     <div formArrayName="web">
@@ -108,14 +108,14 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger form-control" (click)="deleteWeb(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteWeb(i)">Delete</button>
         </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addWeb()">Add web</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addWeb()">Add web</button>
     </div>
 
   </div>
-  <div class="row">
+  <div class="row" *ngIf="role !== '1'">
     <button class="btn-primary btn mt-3 col-md-2 mx-auto" type="submit" [disabled]="!personalInfoForm.valid">Save</button>
   </div>
 </form>

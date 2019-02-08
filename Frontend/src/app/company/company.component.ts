@@ -12,7 +12,7 @@ import { CompanyOfferService } from '../company-offer.service';
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-    currentUser: Company;
+  currentUser: Company;
   allCompanyOffers: Array<Offer> = []
 
   constructor(private studentService: StudentService,
@@ -45,7 +45,7 @@ export class CompanyComponent implements OnInit {
       )
   }
 
-  openDetails(info:String){
+  openDetails(info: String) {
     console.log(info)
     localStorage.setItem("offer", info as string)
     this.router.navigate(['/offerDetails'])

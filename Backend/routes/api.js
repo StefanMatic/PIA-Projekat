@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+const path = require('path')
 
 const mongoose = require('mongoose')
 const db = "mongodb://localhost:27017/jobfair"
@@ -46,11 +47,12 @@ const storeFile = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const name = file.originalname
-        .toLowerCase()
-        .split(" ")
-        .join("-");
-    const ext = MIME_TYPE_MAP_FILE[file.mimetype];
-    cb(null, name + "-" + Date.now() + "." + ext);    }
+            .toLowerCase()
+            .split(" ")
+            .join("-");
+        const ext = MIME_TYPE_MAP_FILE[file.mimetype];
+        cb(null, name + "-" + Date.now() + "." + ext);
+    }
 });
 
 const User = require('../models/user')
@@ -309,6 +311,22 @@ router.post('/updateApplicationStatus', (req, res) => {
             else
                 console.log(app)
         })
+})
+
+router.post('/findAllApplications', (req, res) => {
+    Application.find({ idOffer: req.body.idOffer }, (err, apps) => {
+        if (err)
+            err => console.log(err)
+        else
+            res.json(apps)
+    })
+})
+
+router.post("/getCoverLetterPDF", (req, res)=>{
+    console.log(req.body.coverLetterPDF)
+    filePath = path.join(__dirname,'../uploads') +'/'+ req.body.coverLetterPDF
+    console.log(filePath)
+    res.sendFile(filePath)
 })
 
 //===========================================

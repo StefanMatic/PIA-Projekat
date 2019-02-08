@@ -19,10 +19,25 @@ export class CvPersonalSkillsComponent implements OnInit {
   statusCV: CVStatus;
   patcher: PersonalSkills;
 
+  role:String;
+  username:String;
+
   constructor(private fb: FormBuilder,  private CVservice: CvService) { }
 
   ngOnInit() {
-    this.CVservice.getCV(localStorage.getItem("username"))
+    this.role = localStorage.getItem("role")
+    console.log(this.role)
+
+    if (this.role === "0"){
+      console.log("Student")
+      this.username = localStorage.getItem("username")
+    }
+    else{
+      console.log("Kompanija")
+      this.username = localStorage.getItem("student")
+    }
+
+    this.CVservice.getCV(this.username)
     .subscribe(
       (res:any) => {
         this.patcher = res as PersonalSkills
@@ -145,8 +160,7 @@ export class CvPersonalSkillsComponent implements OnInit {
 
   onSubmit() {
     if (this.personalSkillsForm.valid) {
-      console.log("nesto")
-      this.skills.username = localStorage.getItem("username")
+      this.skills.username = this.username
       this.skills.forth = true;
 
       this.skills.languages = this.personalSkillsForm.value.languageInfo.languages

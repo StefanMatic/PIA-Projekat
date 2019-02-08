@@ -20,12 +20,12 @@
             <input type="text" formControlName="lan" class="form-control rounded-5">
           </div>
           <div class="col-md-2">
-            <button class="btn btn-danger form-control" (click)="deleteLanguage(i)">Delete</button>
+            <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteLanguage(i)">Delete</button>
           </div>
         </div>
       </div>
 
-      <button class="btn btn-warning m-2 " (click)="addLanguage()">Add language</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2 " (click)="addLanguage()">Add language</button>
     </div>
   </div>
 
@@ -41,10 +41,10 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger form-control" (click)="deleteComSkills(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteComSkills(i)">Delete</button>
         </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addComSkills()">Add skill</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addComSkills()">Add skill</button>
     </div>
 
     <div formArrayName="organisationSkills">
@@ -54,10 +54,10 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger form-control" (click)="deleteOrganisationSkills(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteOrganisationSkills(i)">Delete</button>
         </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addOrganisationSkills()">Add skill</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addOrganisationSkills()">Add skill</button>
     </div>
 
     <div formArrayName="jobSkills">
@@ -67,10 +67,10 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger form-control" (click)="deleteJobSkills(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteJobSkills(i)">Delete</button>
         </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addJobSkills()">Add skill</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addJobSkills()">Add skill</button>
     </div>
 
     <div formArrayName="digitalSkills">
@@ -80,15 +80,15 @@
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger form-control" (click)="deleteDigitalSkills(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger form-control" (click)="deleteDigitalSkills(i)">Delete</button>
         </div>
       </div>
-      <button class="btn btn-warning m-2" (click)="addDigitalSkills()">Add skill</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2" (click)="addDigitalSkills()">Add skill</button>
     </div>
 
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="role !== '1'">
     <button class="btn-primary btn mx-auto col-md-2" type="submit" [disabled]="!personalSkillsForm.valid">Save</button>
   </div>
 </form>

@@ -43,14 +43,14 @@
         </div>
       </div>
       <div class="col-md-2 offset-md-10">
-        <button class="btn btn-danger m-2 mx-auto" (click)="deleteExperience(i)">Delete</button>
+        <button [class.disabled]="role === '1'" class="btn btn-danger m-2 mx-auto" (click)="deleteExperience(i)">Delete</button>
       </div>
       <hr>
     </div>
-    <button class="btn btn-warning m-2 " (click)="addExperience()">Add experience</button>
+    <button [class.disabled]="role === '1'" class="btn btn-warning m-2 " (click)="addExperience()">Add experience</button>
 
   </div>
-  <div class="row">
+  <div class="row" *ngIf="role !== '1'">
     <button class="btn-primary btn mt-3 col-md-2 mx-auto" type="submit" [disabled]="!workForm.valid">Save</button>
   </div>
 </form>

@@ -19,6 +19,9 @@ export class CvEducationComponent implements OnInit {
   statusCV: CVStatus;
   patcher: GetEducation;
 
+  role:String;
+  username:String;
+
   constructor(private fb: FormBuilder, private CVservice: CvService) { }
 
   educationForm = this.fb.group({
@@ -30,7 +33,19 @@ export class CvEducationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.CVservice.getCV(localStorage.getItem("username"))
+    this.role = localStorage.getItem("role")
+    console.log(this.role)
+
+    if (this.role === "0"){
+      console.log("Student")
+      this.username = localStorage.getItem("username")
+    }
+    else{
+      console.log("Kompanija")
+      this.username = localStorage.getItem("student")
+    }
+
+    this.CVservice.getCV(this.username)
     .subscribe(
       (res:any) => {
         this.patcher = res as GetEducation
@@ -88,7 +103,7 @@ export class CvEducationComponent implements OnInit {
       }
       if (this.dateCheck) {
         console.log("usaoo")
-        this.myEducation.username = localStorage.getItem("username")
+        this.myEducation.username = this.username
         this.myEducation.third = true
 
         this.myEducation.education = this.educationForm.value.education

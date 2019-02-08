@@ -6,3 +6,7 @@
 .nice-text{
     text-indent: 5%;
 }
+
+.nice-radius{
+    border-radius: 25px;
+}

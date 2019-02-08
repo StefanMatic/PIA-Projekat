@@ -26,28 +26,43 @@ export class CvWorkExperienceComponent implements OnInit {
   dateCheck: Boolean = true;
   workEx: Array<WorkExperience> = []
 
+  role: String;
+  username: String;
+
   ngOnInit() {
-    this.CVservice.getCV(localStorage.getItem("username"))
-    .subscribe(
-      (res:any) => {
-        this.patcher = res as GetWorkExperience
-        this.statusCV = res as CVStatus
+    this.role = localStorage.getItem("role")
+    console.log(this.role)
 
-        if (this.statusCV.second){
+    if (this.role === "0") {
+      console.log("Student")
+      this.username = localStorage.getItem("username")
+    }
+    else {
+      console.log("Kompanija")
+      this.username = localStorage.getItem("student")
+    }
 
-          for (this.i = 0; this.i < this.patcher.experience.length - 1; this.i++) {
-            this.addExperience()
+    this.CVservice.getCV(this.username)
+      .subscribe(
+        (res: any) => {
+          this.patcher = res as GetWorkExperience
+          this.statusCV = res as CVStatus
+
+          if (this.statusCV.second) {
+
+            for (this.i = 0; this.i < this.patcher.experience.length - 1; this.i++) {
+              this.addExperience()
+            }
+
+            this.workForm.patchValue({
+              experience: this.patcher.experience
+            })
           }
+        },
+        err => console.log(err)
+      )
 
-          this.workForm.patchValue({
-            experience: this.patcher.experience
-          })
-        }
-      },
-      err => console.log(err)
-    )
-    
-    
+
   }
 
   get experience() {
@@ -88,7 +103,7 @@ export class CvWorkExperienceComponent implements OnInit {
       }
       if (this.dateCheck) {
         console.log("usaoo")
-        this.work.username = localStorage.getItem("username")
+        this.work.username = this.username
         this.work.second = true
 
         this.work.experience = this.workForm.value.experience

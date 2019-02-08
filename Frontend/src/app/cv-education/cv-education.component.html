@@ -43,14 +43,14 @@
           </div>
         </div>
         <div class="col-md-2 offset-md-10">
-          <button class="btn btn-danger m-2 mx-auto" (click)="deleteEducation(i)">Delete</button>
+          <button [class.disabled]="role === '1'" class="btn btn-danger m-2 mx-auto" (click)="deleteEducation(i)">Delete</button>
         </div>
         <hr>
       </div>
-      <button class="btn btn-warning m-2 " (click)="addEducation()">Add education or training</button>
+      <button [class.disabled]="role === '1'" class="btn btn-warning m-2 " (click)="addEducation()">Add education or training</button>
   
     </div>
-    <div class="row">
+    <div class="row" *ngIf="role !== '1'">
       <button class="btn-primary btn mx-auto col-md-2" type="submit" [disabled]="!educationForm.valid">Save</button>
     </div>
   </form>

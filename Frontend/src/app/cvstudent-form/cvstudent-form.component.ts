@@ -10,26 +10,35 @@ import { Router } from '@angular/router';
 })
 export class CVstudentFormComponent implements OnInit {
   statusCV:CVStatus;
+  role:String;
+  username:String;
 
   constructor(private CVserver: CvService,
     private router: Router) { }
 
   ngOnInit() {
+    this.role = localStorage.getItem("role")
+    console.log(this.role)
+
+    if (this.role === "0"){
+      console.log("Student")
+      this.username = localStorage.getItem("username")
+    }
+    else{
+      console.log("Kompanija")
+      this.username = localStorage.getItem("student")
+    }
   }
 
   finishCV(){
-    this.CVserver.getCV(localStorage.getItem("username"))
+    this.CVserver.getCV(this.username)
     .subscribe(
       (res:CVStatus) => {
         this.statusCV = res;
         if (this.statusCV.first && this.statusCV.second && this.statusCV.third && this.statusCV.forth){
-          console.log("moze dalje")
           this.router.navigate(['/student'])
-
         }
-        else{
-          console.log("mora jos")
-        }
+        
       },
       err => console.log(err)
     )
