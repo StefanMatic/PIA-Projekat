@@ -9,6 +9,7 @@ import { saveAs } from 'file-saver';
 import { FormBuilder } from '@angular/forms';
 import { Application } from '../models/application';
 import { Router } from '@angular/router';
+import { getLocaleTimeFormat } from '@angular/common';
 
 @Component({
   selector: 'app-company-offer-details',
@@ -19,9 +20,13 @@ export class CompanyOfferDetailsComponent implements OnInit {
   //promenljive za rad sa izgledom
   currentUserRole: String;
   toMake: Boolean = false;
+  applicationReady: Boolean = true;
   applicationIsSent: Boolean = false;
   applyFormShow: Boolean = false;
-
+  alreadyApplied: Boolean = true;
+  helpToApply: Boolean = false;
+  offerDone: Boolean = false;
+  decided:Boolean = false;
 
   //promenljive za rad sa podacima
   coverLetterText: String = ''
@@ -52,6 +57,7 @@ export class CompanyOfferDetailsComponent implements OnInit {
         (res: Offer) => {
           console.log(res)
           this.myOffer = res
+          this.checkFoundDates()
         },
         err => console.log(err)
       )
@@ -66,6 +72,42 @@ export class CompanyOfferDetailsComponent implements OnInit {
           }
         )
     }
+    else {
+      console.log("student je")
+      this.appService.getAllApplications(this.offerId)
+        .subscribe(
+          (res: Array<Application>) => {
+            this.allCurrentApplications = res
+            console.log(this.allCurrentApplications)
+
+            for (let app of res) {
+              if (app.username === localStorage.getItem("username"))
+                this.helpToApply = true
+            }
+
+            if (!this.helpToApply) {
+              this.alreadyApplied = false;
+            }
+
+            console.log(this.alreadyApplied)
+            console.log(this.helpToApply)
+
+          }
+        )
+    }
+  }
+
+  checkFoundDates() {
+    console.log(Date.parse(this.myOffer.deadlineDate.toString() + ' ' + this.myOffer.deadlineTime + ':00'))
+    console.log(Date.now())
+    if (Date.parse(this.myOffer.deadlineDate.toString() + ' ' + this.myOffer.deadlineTime + ':00') > Date.now()) {
+      this.offerDone = false
+    }
+    else {
+      this.offerDone = true
+    }
+
+    console.log(this.offerDone)
   }
 
   fileSelected($event) {
@@ -113,17 +155,51 @@ export class CompanyOfferDetailsComponent implements OnInit {
   getCoverLetter(pathToCoverLetter: String) {
     console.log(pathToCoverLetter)
     this.helper = pathToCoverLetter.split('/');
-    this.helperWord = this.helper[this.helper.length-1]
+    this.helperWord = this.helper[this.helper.length - 1]
     this.appService.getCoverLetterPDF(this.helperWord).subscribe(
-      res=>saveAs(res, this.helperWord),
-      err=>console.log(err)
+      res => saveAs(res, this.helperWord),
+      err => console.log(err)
     )
+  }
+
+  acceptSubmit(user: String) {
+    this.myApplication.idOffer = this.offerId
+    this.myApplication.username = user
+    this.myApplication.status = "1"
+
+    this.appService.updateStatus(this.myApplication).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    )
+
+    this.decided = true
+  }
+
+  rejectSubmit(user: String) {
+    this.myApplication.idOffer = this.offerId
+    this.myApplication.username = user
+    this.myApplication.status = "2"
+
+    this.appService.updateStatus(this.myApplication).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    )
+
+    this.decided = true
   }
 
   onSubmit() {
     this.myApplication.idOffer = localStorage.getItem("offer")
     this.myApplication.username = localStorage.getItem("username")
     this.myApplication.status = "0"
+
+    if (this.toMake || this.coverLetterText === '' || this.coverLetForm.value.coverLetterPDF !== ''){
+      this.applicationReady  = false
+      return
+    }
+    else{
+      this.applicationReady = true
+    }
 
     this.appService.makeApplication(this.myApplication).subscribe(
       res => {

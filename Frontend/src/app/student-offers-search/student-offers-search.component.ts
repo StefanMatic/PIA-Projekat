@@ -32,12 +32,13 @@ export class StudentOffersSearchComponent implements OnInit {
         console.log(res)
         this.startAllOffers = res
         this.allOffers = res
-        this.checkOffersDate()
+     //   this.checkOffersDate()
       },
       (err) => console.log(err)
     )
   }
 
+  /*
   checkFoundDates() {
     this.helperArray = this.allOffers;
     this.allOffers = []
@@ -56,6 +57,7 @@ export class StudentOffersSearchComponent implements OnInit {
         this.allOffers.push(offer)
     }
   }
+  */
 
   openDetails(info: String) {
     console.log(info)
@@ -65,7 +67,7 @@ export class StudentOffersSearchComponent implements OnInit {
 
   onReset() {
     this.allOffers = this.startAllOffers;
-    this.checkOffersDate();
+    //this.checkOffersDate();
     this.offerSearch = '';
     this.companySearch = '';
     this.isInternship = false;
@@ -113,7 +115,7 @@ export class StudentOffersSearchComponent implements OnInit {
       //Proslo je sve provere i mozemo da ga ubacimo
       this.allOffers.push(offer)
     }
-    this.checkFoundDates()
+ //   this.checkFoundDates()
   }
 
 }
