@@ -32,6 +32,8 @@ import { StudentOffersSearchComponent } from './student-offers-search/student-of
 import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { ApplicationService } from './application.service';
+import { AdminComponent } from './admin/admin.component';
+import { PackagesViewComponent } from './packages-view/packages-view.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ApplicationService } from './application.service';
     CompanyOfferDetailsComponent,
     StudentOffersSearchComponent,
     StudentCompanySearchComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    AdminComponent,
+    PackagesViewComponent
   ],
   imports: [
     BrowserModule,

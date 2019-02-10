@@ -1,0 +1,21 @@
+.image-profile{
+    max-height: 300px;
+    max-width: 300px;
+    min-height: 100px;
+    min-width: 100px;
+    height: 80%;
+    width: auto;
+}
+
+.alignText{
+    vertical-align: 20%;
+}
+
+.be-inline{
+    display: inline;
+}
+
+.admin-div{
+    background-color: rgba(255, 168, 5, 0.438);
+    border-radius: 25px;
+}

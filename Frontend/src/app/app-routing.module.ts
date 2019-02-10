@@ -12,6 +12,7 @@ import { CompanyOfferDetailsComponent } from './company-offer-details/company-of
 import { StudentOffersSearchComponent } from './student-offers-search/student-offers-search.component';
 import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'student', component: StudentComponent },
   { path: 'company', component: CompanyComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'listCompanies', component: CompanyListComponent },
   { path: 'makeCV', component: CVstudentFormComponent },
   { path: 'makeOffer', component: CompanyOfferComponent },

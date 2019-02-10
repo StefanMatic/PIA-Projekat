@@ -59,6 +59,7 @@ const User = require('../models/user')
 const CV = require('../models/cv')
 const Offer = require('../models/offer')
 const Application = require('../models/application')
+const Package = require ('../models/package')
 
 mongoose.connect(db, err => {
     if (err) {

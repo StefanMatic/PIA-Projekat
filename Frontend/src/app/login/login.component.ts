@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
             else if (res.role === "1") {
               this.router.navigate(['/company'])
             }
+            else if (res.role === "2"){
+              this.router.navigate(['/admin'])
+            }
           }
           else {
             this.badInput = true;
