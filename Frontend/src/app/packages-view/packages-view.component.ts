@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class PackagesViewComponent implements OnInit {
   allPackages:Package
+  role:String
 
   constructor(private packageService:PackagesService,
     private router: Router) { }
 
   ngOnInit() {
+    this.role = localStorage.getItem("role")
+    console.log(this.role)
     console.log("uziam sve podatke")
     this.packageService.getAllOffers().subscribe(
       (res:Package)=>{

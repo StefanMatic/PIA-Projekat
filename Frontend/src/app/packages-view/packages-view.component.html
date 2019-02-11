@@ -5,8 +5,13 @@
     <hr>
   </div>
 </div>
+<div class="row my-2" *ngIf="role === '1'">
+  <div class="col-md-12 text-center">
+    <h6>Please choose one of the packages that fit your needs the best and if you want, feel free to make them your own!</h6>
+  </div>
+</div>
 <div class="row my-3 text-center">
-  <div class="col-md-3 my-2" *ngFor="let package of allPackages.Packages; let i=index">
+  <div class="col-md-4 my-2" *ngFor="let package of allPackages.Packages; let i=index">
     <div class="card col-md-12">
       <div class="card-header text-center">
         {{package.Title}}
@@ -51,7 +56,7 @@
 
       </ul>
 
-      <div class="card-footer">
+      <div class="card-footer" *ngIf="role === '2'">
         <button class="btn btn-warning" (click)="editPackage(i)">EDIT</button>
       </div>
 
@@ -59,7 +64,7 @@
   </div>
 </div>
 
-<div class="row my-3">
+<div class="row my-3" *ngIf="role === '2'">
   <div class="col-md-12 text-center">
     <button class="btn btn-warning btn-large" (click)="makeNewPackage()">
       <h5>Make new package</h5>
@@ -92,7 +97,7 @@
   </div>
 </div>
 
-<div class="row my-3">
+<div class="row my-3" *ngIf="role === '2'">
     <div class="col-md-12 text-center">
       <button class="btn btn-warning btn-large" (click)="editAdditional()">
         <h5>Edit additional options</h5>
