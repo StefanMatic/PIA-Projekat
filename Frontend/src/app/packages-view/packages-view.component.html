@@ -1,3 +1,101 @@
-<p>
-  packages-view works!
-</p>
+<div class="row my-2">
+  <div class="col-md-12 text-center">
+    <hr>
+    <h3>All packages:</h3>
+    <hr>
+  </div>
+</div>
+<div class="row my-3 text-center">
+  <div class="col-md-3 my-2" *ngFor="let package of allPackages.Packages; let i=index">
+    <div class="card col-md-12">
+      <div class="card-header text-center">
+        {{package.Title}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h6 class="be-inline">Content:</h6>
+          <ul>
+            <li *ngFor="let con of package.Content">{{con}}</li>
+          </ul>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Video promotions:</h6>
+          <p class="be-inline"> {{package.VideoPromotion}}</p>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Number of lessons:</h6>
+          <p class="be-inline"> {{package.NoLessons}}</p>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Number of workshops:</h6>
+          <p class="be-inline"> {{package.NoWorkchops}}</p>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Number of presentations:</h6>
+          <p class="be-inline"> {{package.NoPresentation}}</p>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Price:</h6>
+          <p class="be-inline"> {{package.Price}}</p>
+        </li>
+
+        <li class="list-group-item">
+          <h6 class="be-inline">Maximum number of companies:</h6>
+          <p class="be-inline"> {{package.MaxCompanies}}</p>
+        </li>
+
+      </ul>
+
+      <div class="card-footer">
+        <button class="btn btn-warning" (click)="editPackage(i)">EDIT</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row my-3">
+  <div class="col-md-12 text-center">
+    <button class="btn btn-warning btn-large" (click)="makeNewPackage()">
+      <h5>Make new package</h5>
+    </button>
+  </div>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-12 text-center">
+    <hr>
+    <h3>Additional offers:</h3>
+    <hr>
+  </div>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-6 mx-auto">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let add of allPackages.Additional; let i=index">
+        <div class="row">
+          <div class="col-md-6">
+            {{add.Title}}
+          </div>
+          <div class="offset-md-3 col-md-3">
+            {{add.Price}}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row my-3">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-warning btn-large" (click)="editAdditional()">
+        <h5>Edit additional options</h5>
+      </button>
+    </div>
+  </div>

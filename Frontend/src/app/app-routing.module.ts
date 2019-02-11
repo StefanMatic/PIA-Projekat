@@ -13,6 +13,9 @@ import { StudentOffersSearchComponent } from './student-offers-search/student-of
 import { StudentCompanySearchComponent } from './student-company-search/student-company-search.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { AdminComponent } from './admin/admin.component';
+import { PackagesViewComponent } from './packages-view/packages-view.component';
+import { PackagesDetailsComponent } from './packages-details/packages-details.component';
+import { PackagesAdditionalDetailsComponent } from './packages-additional-details/packages-additional-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,7 +30,10 @@ const routes: Routes = [
   { path: 'offerDetails', component: CompanyOfferDetailsComponent },
   { path: 'companyDetails', component: CompanyDetailsComponent },
   { path: 'searchOffers', component: StudentOffersSearchComponent },
-  { path: 'searchCompany', component: StudentCompanySearchComponent }
+  { path: 'searchCompany', component: StudentCompanySearchComponent },
+  { path: 'allPackages', component: PackagesViewComponent },
+  { path: 'packageDetails', component: PackagesDetailsComponent },
+  { path: 'additionalDetails', component: PackagesAdditionalDetailsComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,40 @@
+<div class="row mt-4 mb-4">
+  <div class="col-md-8 white-background mx-auto p-3">
+    <form [formGroup]="additionalForm" (ngSubmit)="onSubmit()">
+      <div class="row p-3">
+        <h3 class="mb-2">All additional options:</h3>
+      </div>
+
+      <div formGroupName="additionalInfo">
+
+        <div formArrayName="Additional">
+          <div *ngFor="let add of Additional.controls; let i=index" class="mb-2">
+            <div [formGroupName]="i" class="row">
+              <div class="col-md-6">
+                <input type="text" formControlName="Title" class="form-control rounded-5">
+              </div>
+              <div class="col-md-4">
+                <input type="text" formControlName="Price" class="form-control rounded-5">
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-danger form-control" (click)="deleteAdditional(i)">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-warning m-2 " (click)="addAdditional()">
+            Add additional option
+          </button>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <button class="btn-primary btn mt-3 col-md-2 mx-auto" type="submit"
+          [disabled]="!additionalForm.valid">Save</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>

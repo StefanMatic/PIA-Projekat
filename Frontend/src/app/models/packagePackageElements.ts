@@ -6,5 +6,6 @@ export interface PackageElement {
     NoWorkchops: Number,
     NoPresentation: Number,
     Price: Number,
-    MaxCompanies: Number
+    MaxCompanies: Number,
+    NoCompany:Number
 }

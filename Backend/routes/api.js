@@ -331,6 +331,31 @@ router.post("/getCoverLetterPDF", (req, res)=>{
 })
 
 //===========================================
+//Rad sa paketima
+//===========================================
+
+router.get('/allPackages', (req, res) => {
+    Package.findOne({}, (err, offers) => {
+        if (err)
+            console.log(err)
+        else
+            res.json(offers)
+    })
+})
+
+
+router.post('/updatePackages', (req, res) => {
+    Package.findByIdAndUpdate(req.body._id,
+        req.body,
+        (err, app) => {
+            if (err)
+                console.log(err)
+            else
+                console.log(app)
+        })
+})
+
+//===========================================
 //===========================================
 
 

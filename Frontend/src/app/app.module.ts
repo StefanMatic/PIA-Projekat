@@ -34,6 +34,9 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { ApplicationService } from './application.service';
 import { AdminComponent } from './admin/admin.component';
 import { PackagesViewComponent } from './packages-view/packages-view.component';
+import { PackagesService } from './packages.service';
+import { PackagesDetailsComponent } from './packages-details/packages-details.component';
+import { PackagesAdditionalDetailsComponent } from './packages-additional-details/packages-additional-details.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { PackagesViewComponent } from './packages-view/packages-view.component';
     StudentCompanySearchComponent,
     CompanyDetailsComponent,
     AdminComponent,
-    PackagesViewComponent
+    PackagesViewComponent,
+    PackagesDetailsComponent,
+    PackagesAdditionalDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,9 @@ import { PackagesViewComponent } from './packages-view/packages-view.component';
     StudentService, 
     CvService, 
     CompanyOfferService,
-    ApplicationService],
+    ApplicationService,
+    PackagesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

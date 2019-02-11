@@ -90,8 +90,8 @@
 
     <div formArrayName="email">
       <label>Email:</label>
-      <div class="row" *ngFor="let mail of email.controls; let i=index">
-        <div class="col-md-10 mt-1 mb-1">
+      <div class="row my-2" *ngFor="let mail of email.controls; let i=index">
+        <div class="col-md-10">
           <input type="text" [formControlName]="i" class="form-control rounded-5">
         </div>
         <div class="col-md-2">

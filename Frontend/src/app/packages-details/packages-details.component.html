@@ -1,0 +1,80 @@
+<div class="row mt-4 mb-4">
+  <div class="col-md-8 white-background mx-auto p-3">
+    <form [formGroup]="packageForm" (ngSubmit)="onSubmit()">
+      <div class="row p-3">
+        <h3 class="mb-2">New package:</h3>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Title:</label>
+          <input formControlName="Title" name="Title" type="text" class="form-control rounded-5">
+        </div>
+      </div>
+
+
+      <div formArrayName="Content">
+        <label>Content:</label>
+        <div class="row my-2" *ngFor="let con of Content.controls; let i=index">
+          <div class="col-md-10">
+            <input type="text" [formControlName]="i" class="form-control rounded-5">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-danger form-control"
+              (click)="deleteContent(i)">Delete</button>
+          </div>
+        </div>
+        <button class="btn btn-warning m-2" (click)="addContent()">Add content</button>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Video promotions:</label>
+          <input formControlName="VideoPromotion" name="VideoPromotion" type="number" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Number of lessons:</label>
+          <input formControlName="NoLessons" name="NoLessons" type="number" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Number of workshops:</label>
+          <input formControlName="NoWorkchops" name="NoWorkchops" type="number" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Number of presentations:</label>
+          <input formControlName="NoPresentation" name="NoPresentation" type="number" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Price:</label>
+          <input formControlName="Price" name="Price" type="number" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="">Maximum number of comanies:</label>
+          <input formControlName="MaxCompanies" name="MaxCompanies" type="text" class="form-control rounded-5">
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn-primary btn mt-3 col-md-2 mx-auto" type="submit"
+          [disabled]="!packageForm.valid">Save</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
