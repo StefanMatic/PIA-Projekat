@@ -399,7 +399,8 @@ router.post('/companyApplication', (req, res) => {
         additional: req.body.additional,
         price: req.body.price,
         companyName: req.body.companyName,
-        status: req.body.status
+        status: req.body.status,
+        message: req.body.message
     })
 
     companyApp.save((err, submit) => {

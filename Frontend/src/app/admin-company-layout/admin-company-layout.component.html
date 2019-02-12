@@ -1,0 +1,112 @@
+<div class="row my-3">
+  <div class="col-md-12 text-center my-2">
+    <h4>Company layout</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <select [(ngModel)]="companySelected" class="custom-select" (change)="companySelect()" name="company">
+      <option value="{{app.companyName}}" *ngFor="let app of acceptedCompanies">{{app.companyName}}</option>
+    </select>
+  </div>
+  <div class="col-md-6" *ngIf="showCompany">
+    <select [(ngModel)]="locationSelected" class="custom-select w-100" name="location" (change)="locationSelect()">
+      <option value="{{loc.Name}}" *ngFor="let loc of locations[0].Location">{{loc.Name}}</option>
+    </select>
+  </div>
+</div>
+<div class="row my-3" *ngIf="showCompany">
+  <div class="col-md-10 mx-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h4>{{currentCompanyApp.companyName}}</h4>
+      </div>
+      <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Package:</h5>
+              <p class="be-inline"> {{currentCompanyApp.package}}</p>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+
+            <div>
+              <h5 class="be-inline">Additional options:</h5>
+              <ul>
+                <li *ngFor="let a of currentCompanyApp.additional">
+                  {{a}}
+                </li>
+              </ul>
+            </div>
+
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Price:</h5>
+              <p class="be-inline"> {{currentCompanyApp.price}}</p>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Location:</h5>
+              <input type="text" [(ngModel)]="currentCompanyApp.location" name="location" class="form-control" disabled>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Time:</h5>
+              <input type="time" [(ngModel)]="currentCompanyApp.time" name="time" class="form-control">
+            </div>
+          </li>
+
+          <li class="list-group-item">
+              <div>
+                <h5 class="be-inline">Stand:</h5>
+                <input type="text" [(ngModel)]="currentCompanyApp.stand" name="location" class="form-control" disabled>
+              </div>
+            </li>
+
+        </ul>
+
+      </div>
+      <div class="col-md-4">
+        <table class="table w-100">
+          <tr>
+            <td colspan="4"><button [class.disabled]="sta1" (click)="standSelect(1)" class="btn btn-primary w-100">st1</button></td>
+          </tr>
+          <tr>
+            <td colspan="3"><button [class.disabled]="sta2" (click)="standSelect(2)" class="btn btn-primary w-100">st2</button></td>
+            <td><button [class.disabled]="sta3" (click)="standSelect(3)" class="btn btn-primary w-100">st3</button></td>
+          </tr>
+          <tr>
+              <td colspan="2"><button [class.disabled]="sta4" (click)="standSelect(4)" class="btn btn-primary w-100">st4</button></td>
+              <td colspan="2"><button [class.disabled]="sta5" (click)="standSelect(5)" class="btn btn-primary w-100">st5</button></td>
+          </tr>
+          <tr>
+              <td colspan="2"><button [class.disabled]="sta6" (click)="standSelect(6)" class="btn btn-primary w-100">st6</button></td>
+              <td colspan="2"><button [class.disabled]="sta7" (click)="standSelect(7)" class="btn btn-primary w-100">st7</button></td>
+          </tr>
+          <tr>
+              <td colspan="2"><button [class.disabled]="sta8" (click)="standSelect(8)" class="btn btn-primary w-100">st8</button></td>
+              <td><button [class.disabled]="sta9" (click)="standSelect(9)" class="btn btn-primary w-100">st9</button></td>
+              <td><button [class.disabled]="sta10" (click)="standSelect(10)" class="btn btn-primary w-100">st10</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-warning" (click)="onSubmit()">Save</button>
+      </div>
+    </div>
+  </div>
+
+</div>

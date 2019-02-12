@@ -1,0 +1,64 @@
+<div class="row" *ngIf="notificationError">
+  <div class="alert alert-danger w-100">
+    You have to write a rejection message
+  </div>
+</div>
+
+<div class="row" *ngFor="let app of companiesPendingReview; let i=index">
+  <div class="col-md-8 offset-md-2">
+    <div class="card mb-3 mx-auto pt-2">
+      <div class="card-body">
+        <h3 class="card-title text-center">{{app.companyName}}</h3>
+
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Package:</h5>
+              <p class="be-inline"> {{app.package}}</p>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+
+            <div>
+              <h5 class="be-inline">Additional options:</h5>
+              <ul>
+                <li *ngFor="let a of app.additional">
+                  {{a}}
+                </li>
+              </ul>
+            </div>
+
+          </li>
+
+
+          <li class="list-group-item">
+            <div>
+              <h5 class="be-inline">Price:</h5>
+              <p class="be-inline"> {{app.price}}</p>
+            </div>
+          </li>
+
+
+        </ul>
+      </div>
+      <div class="card-footer text-center" *ngIf="app.status === '0'">
+        <button class="btn btn-success mr-2" (click)="acceptCompanu(i)">Accept</button>
+        <button class="btn btn-danger mr-2" (click)="denieCompany(i)">Reject</button>
+        <div class="row my-2">
+          <div class="col-md-12">
+            <h5>Rejection message:</h5>
+            <textarea [(ngModel)]="app.message" class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row my-5" *ngIf="companiesPendingReview.length === 0">
+  <div class="col-md-6 mx-auto text-center">
+    <h4>No more applications!</h4>
+  </div>
+</div>

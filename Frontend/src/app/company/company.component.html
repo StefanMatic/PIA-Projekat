@@ -1,3 +1,21 @@
+<div class="alert alert-success" *ngIf="acceptedFlag">
+  You have been accepted to perticipate in the new fair
+</div>
+<div class="alert alert-danger" *ngIf="deniedFlag">
+    You have been rejected to perticipate in the new fair.
+    <div class="row">
+      <div class="col-md-12">
+        Message:
+      </div>
+      <div class="col-md-12">
+        {{rejectionMessage}}
+      </div>
+    </div>
+</div>
+<div class="alert alert-info" *ngIf="haventYetApplied">
+  You still havent applied to the fair. Hurry up!
+</div>
+
 <div class="row mt-3">
   <div class="col-md-3 text-center mt-3">
     <img [src]="currentUser.image" [alt]="currentUser.username" class="img-fluid rounded-circle image-profile">
@@ -47,8 +65,8 @@
 </div>
 <div class="row mt-4">
   <div class="col-md-8 text-center mx-auto">
-    <button class="btn btn-info btn-lg mr-3" routerLink="/makeOffer">Make offer</button>
-    <button class="btn btn-info btn-lg" [class.disabled]="!fair" (click)="applyToFair()">Apply to fair</button>
+    <button class="btn btn-info btn-lg mr-3" [class.disabled]="!fair || deniedFlag" routerLink="/makeOffer">Make offer</button>
+    <button class="btn btn-info btn-lg" [class.disabled]="!fair || !haventYetApplied" (click)="applyToFair()">Apply to fair</button>
   </div>
 </div>
 

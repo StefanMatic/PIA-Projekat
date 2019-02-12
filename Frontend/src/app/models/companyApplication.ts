@@ -5,5 +5,8 @@ export interface CompanyApplication{
     price:Number,
     companyName:String,
     message:String,
-    status:String
+    status:String,
+    time:String,
+    location:String,
+    stand:String
 }

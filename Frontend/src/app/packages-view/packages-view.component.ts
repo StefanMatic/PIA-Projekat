@@ -89,6 +89,7 @@ export class PackagesViewComponent implements OnInit {
     this.myApplication.companyName = this.currentUser
     this.myApplication.status = '0'
     this.myApplication.price = this.check
+    this.myApplication.message = ''
 
     console.log(this.myApplication)
 

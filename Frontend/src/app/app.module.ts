@@ -38,6 +38,8 @@ import { PackagesService } from './packages.service';
 import { PackagesDetailsComponent } from './packages-details/packages-details.component';
 import { PackagesAdditionalDetailsComponent } from './packages-additional-details/packages-additional-details.component';
 import { CompanyApplicationService } from './company-application.service';
+import { AdminCompanyApplicationsComponent } from './admin-company-applications/admin-company-applications.component';
+import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-company-layout.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { CompanyApplicationService } from './company-application.service';
     AdminComponent,
     PackagesViewComponent,
     PackagesDetailsComponent,
-    PackagesAdditionalDetailsComponent
+    PackagesAdditionalDetailsComponent,
+    AdminCompanyApplicationsComponent,
+    AdminCompanyLayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import { CvService } from '../cv.service';
 import { Router } from '@angular/router';
 import { Offer } from '../models/offer';
 import { CompanyOfferService } from '../company-offer.service';
+import { CompanyApplicationService } from '../company-application.service';
+import { CompanyApplication } from '../models/companyApplication';
 
 @Component({
   selector: 'app-company',
@@ -14,15 +16,46 @@ import { CompanyOfferService } from '../company-offer.service';
 export class CompanyComponent implements OnInit {
   currentUser: Company;
   allCompanyOffers: Array<Offer> = []
-  fair:String
+  fair: String
+
+  allCompanyApplications: Array<CompanyApplication>
+
+  acceptedFlag:Boolean = false;
+  deniedFlag:Boolean = false;
+  haventYetApplied:Boolean = false;
+  rejectionMessage:String = ''
 
   constructor(private studentService: StudentService,
     private offerService: CompanyOfferService,
-    private router: Router) { }
+    private router: Router,
+    private companyAppService: CompanyApplicationService) { }
 
   ngOnInit() {
     this.fair = localStorage.getItem("fair")
-    console.log(localStorage.getItem("username"))
+    this.companyAppService.getAllApplications(this.fair).subscribe(
+      (res: Array<CompanyApplication>) => {
+        this.allCompanyApplications = res
+
+        for (let app of this.allCompanyApplications){
+          if (app.companyName === localStorage.getItem("username")){
+            if (app.status === '1'){
+              this.acceptedFlag = true
+            }
+            if (app.status === '2'){
+              this.deniedFlag = true
+              this.rejectionMessage = app.message
+            }
+            break
+          }
+        }
+
+        if (this.acceptedFlag === false && this.deniedFlag === false){
+          this.haventYetApplied = true
+        }
+      },
+      err => console.log(err)
+    )
+
     this.studentService.getCurrentUser(localStorage.getItem("username"))
       .subscribe(
         (res: Company) => {
@@ -53,7 +86,7 @@ export class CompanyComponent implements OnInit {
     this.router.navigate(['/offerDetails'])
   }
 
-  applyToFair(){
+  applyToFair() {
     this.router.navigate(['/allPackages'])
   }
 

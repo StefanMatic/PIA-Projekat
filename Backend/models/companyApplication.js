@@ -25,6 +25,15 @@ const companyApplicationSchema = new Schema({
    //2 - denied
    status:{
        type:String
+   },
+   time:{
+       type:String
+   },
+   location:{
+       type:String
+   },
+   stand:{
+       type:String
    }
 })
 
