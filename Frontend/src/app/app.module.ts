@@ -41,6 +41,7 @@ import { CompanyApplicationService } from './company-application.service';
 import { AdminCompanyApplicationsComponent } from './admin-company-applications/admin-company-applications.component';
 import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-company-layout.component';
 import { AdminFairCreateComponent } from './admin-fair-create/admin-fair-create.component';
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AdminFairCreateComponent } from './admin-fair-create/admin-fair-create.
     AppRoutingModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot(),
-    DlDateTimePickerDateModule
+    DlDateTimePickerDateModule,
+    BarRatingModule
   ],
   providers: [
     AuthService, 

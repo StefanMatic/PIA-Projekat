@@ -62,6 +62,7 @@ const Application = require('../models/application')
 const Package = require('../models/package')
 const CompanyApp = require('../models/companyApplication')
 const Fair = require('../models/fair')
+const Rating = require('../models/ratings')
 
 mongoose.connect(db, err => {
     if (err) {
@@ -443,6 +444,32 @@ router.post('/companyApplication', (req, res) => {
         else {
             res.status(200).send(submit)
         }
+    })
+})
+//===========================================
+//===========================================
+
+//===========================================
+//rad sa ratingom
+//===========================================
+router.post('/makeRating', (req, res) => {
+    Rating.findOneAndUpdate({CompanyName: req.body.CompanyName, Username:req.body.Username},
+        req.body,
+        {upsert: true, new: true, setDefaultsOnInsert: true},
+        (err, app) => {
+            if (err)
+                console.log(err)
+            else
+                console.log(app)
+        })
+})
+
+router.get('/allRatings', (req, res) => {
+    Rating.find({}, (err, fairs) => {
+        if (err)
+            console.log(err)
+        else
+            res.json(fairs)
     })
 })
 //===========================================
