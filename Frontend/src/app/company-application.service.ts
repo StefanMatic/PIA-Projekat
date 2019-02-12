@@ -10,6 +10,8 @@ export class CompanyApplicationService {
   private _updateCompanyApplication = "http://localhost:4000/api/updateCopmanyApplication"
   private _getAllCompanyApplication = "http://localhost:4000/api/allCompanyApplications"
   private _getAllFairs = "http://localhost:4000/api/allFairs"
+  private _makeFair = "http://localhost:4000/api/makeFair"
+
 
   constructor(private http: HttpClient) { }
 
@@ -60,5 +62,16 @@ export class CompanyApplicationService {
   getAllFairs(){
     console.log("getAllFairs")
     return this.http.get(this._getAllFairs)
+  }
+
+  makeFair(fair){
+    console.log("makeFair")
+    console.log(fair)
+    const fairData = {
+      Fairs: fair.Fairs,
+      Locations: fair.Locations
+    }
+
+    return this.http.post<any>(this._makeFair, fairData)
   }
 }

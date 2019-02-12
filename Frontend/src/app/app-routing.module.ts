@@ -18,6 +18,7 @@ import { PackagesDetailsComponent } from './packages-details/packages-details.co
 import { PackagesAdditionalDetailsComponent } from './packages-additional-details/packages-additional-details.component';
 import { AdminCompanyApplicationsComponent } from './admin-company-applications/admin-company-applications.component';
 import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-company-layout.component';
+import { AdminFairCreateComponent } from './admin-fair-create/admin-fair-create.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -37,7 +38,8 @@ const routes: Routes = [
   { path: 'packageDetails', component: PackagesDetailsComponent },
   { path: 'additionalDetails', component: PackagesAdditionalDetailsComponent },
   { path: 'adminCompanyApplications', component: AdminCompanyApplicationsComponent },
-  { path: 'companyLayout', component: AdminCompanyLayoutComponent }
+  { path: 'companyLayout', component: AdminCompanyLayoutComponent },
+  { path: 'fairCreate', component: AdminFairCreateComponent}
 ];
 
 @NgModule({

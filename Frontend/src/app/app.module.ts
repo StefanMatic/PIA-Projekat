@@ -40,6 +40,7 @@ import { PackagesAdditionalDetailsComponent } from './packages-additional-detail
 import { CompanyApplicationService } from './company-application.service';
 import { AdminCompanyApplicationsComponent } from './admin-company-applications/admin-company-applications.component';
 import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-company-layout.component';
+import { AdminFairCreateComponent } from './admin-fair-create/admin-fair-create.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-compan
     PackagesDetailsComponent,
     PackagesAdditionalDetailsComponent,
     AdminCompanyApplicationsComponent,
-    AdminCompanyLayoutComponent
+    AdminCompanyLayoutComponent,
+    AdminFairCreateComponent
   ],
   imports: [
     BrowserModule,

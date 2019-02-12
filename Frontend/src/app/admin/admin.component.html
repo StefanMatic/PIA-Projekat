@@ -35,7 +35,9 @@
   <div class="col-md-12 text-center offset-md-3 text-center mx-auto">
     <button class="btn btn-info btn-lg mr-3" routerLink="/allPackages">Packages</button>
     <button class="btn btn-info btn-lg mr-3" routerLink="/adminCompanyApplications">View applications</button>
-    <button class="btn btn-info btn-lg" routerLink="/companyLayout">Make layout</button>
+    <button class="btn btn-info btn-lg mr-3" routerLink="/companyLayout">Make layout</button>
+    <button class="btn btn-info btn-lg mr-3" [class.disabled]="!createFair" routerLink="/fairCreate">Create fair</button>
+
   </div>
 
 </div>

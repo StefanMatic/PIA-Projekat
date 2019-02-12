@@ -7,6 +7,9 @@ const packageSchema = new Schema({
     },
     Additional:{
         type:Array
+    },
+    Fair:{
+        type:String
     }
 })
 

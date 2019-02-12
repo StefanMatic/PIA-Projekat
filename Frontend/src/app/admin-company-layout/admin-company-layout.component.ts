@@ -5,6 +5,7 @@ import { Fair } from '../models/fairs';
 import { FairLocationElement } from '../models/fairsLocationElement';
 import { Package } from '../models/package';
 import { PackagesService } from '../packages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-company-layout',
@@ -38,9 +39,15 @@ export class AdminCompanyLayoutComponent implements OnInit {
   sta8: Boolean = false
   sta9: Boolean = false
   sta10: Boolean = false
+  sta11: Boolean = false
+  sta12: Boolean = false
+  sta13: Boolean = false
+  sta14: Boolean = false
+
 
   constructor(private companyAppService: CompanyApplicationService,
-    private packageService: PackagesService) { }
+    private packageService: PackagesService,
+    private router: Router) { }
 
   ngOnInit() {
     this.fair = localStorage.getItem("fair")
@@ -90,6 +97,18 @@ export class AdminCompanyLayoutComponent implements OnInit {
               case '10':
                 this.sta10 = true;
                 break;
+              case '11':
+                this.sta11 = true;
+                break;
+              case '12':
+                this.sta12 = true;
+                break;
+              case '13':
+                this.sta13 = true;
+                break;
+              case '14':
+                this.sta14 = true;
+                break;
             }
           }
         }
@@ -136,46 +155,15 @@ export class AdminCompanyLayoutComponent implements OnInit {
     console.log(index)
     this.currentCompanyApp.stand = index
 
-    switch (index) {
-      case 1:
-        this.sta1 = true;
-        break;
-      case 2:
-        this.sta2 = true;
-        break;
-      case 3:
-        this.sta3 = true;
-        break;
-      case 4:
-        this.sta4 = true;
-        break;
-      case 5:
-        this.sta5 = true;
-        break;
-      case 6:
-        this.sta6 = true;
-        break;
-      case 7:
-        this.sta7 = true;
-        break;
-      case 8:
-        this.sta8 = true;
-        break;
-      case 9:
-        this.sta9 = true;
-        break;
-      case 10:
-        this.sta10 = true;
-        break;
-    }
   }
 
-  onSubmit(){
+  onSubmit() {
     this.companyAppService.updateCompanyApplication(this.currentCompanyApp).subscribe(
-      res=>console.log(res),
-      err=>console.log(err)
+      res => console.log(res),
+      err => console.log(err)
     )
     this.showCompany = false
+    this.router.navigate(['/companyLayout'])
   }
 
 }

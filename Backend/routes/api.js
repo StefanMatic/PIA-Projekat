@@ -345,6 +345,23 @@ router.get('/allPackages', (req, res) => {
     })
 })
 
+router.post('/makePackage', (req, res) => {
+    let newPackage = new Package({
+        Packages: req.body.Packages,
+      Additional: req.body.Additional,
+      Fair: req.body.Fair
+    })
+    newPackage.save((err, pack) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(pack)
+        }
+    })
+})
+
+
 
 router.post('/updatePackages', (req, res) => {
     Package.findByIdAndUpdate(req.body._id,
@@ -364,11 +381,27 @@ router.post('/updatePackages', (req, res) => {
 //Rad sa fair-om i aplikacijama kompanija
 //===========================================
 router.get('/allFairs', (req, res) => {
-    Fair.findOne({}, (err, fairs) => {
+    Fair.find({}, (err, fairs) => {
         if (err)
             console.log(err)
         else
             res.json(fairs)
+    })
+})
+
+router.post('/makeFair', (req, res) => {
+    let fair = new Fair({
+        Fairs: req.body.Fairs,
+        Locations: req.body.Locations
+    })
+
+    fair.save((err, fair) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(fair)
+        }
     })
 })
 

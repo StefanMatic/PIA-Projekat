@@ -1,16 +1,18 @@
 <div class="row my-3">
   <div class="col-md-12 text-center my-2">
-    <h4>Company layout</h4>
+    <h4>Company layout:</h4>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6">
+    <label for="">Select company:</label>
     <select [(ngModel)]="companySelected" class="custom-select" (change)="companySelect()" name="company">
       <option value="{{app.companyName}}" *ngFor="let app of acceptedCompanies">{{app.companyName}}</option>
     </select>
   </div>
   <div class="col-md-6" *ngIf="showCompany">
+      <label for="">Select location:</label>
     <select [(ngModel)]="locationSelected" class="custom-select w-100" name="location" (change)="locationSelect()">
       <option value="{{loc.Name}}" *ngFor="let loc of locations[0].Location">{{loc.Name}}</option>
     </select>
@@ -98,6 +100,13 @@
               <td colspan="2"><button [class.disabled]="sta8" (click)="standSelect(8)" class="btn btn-primary w-100">st8</button></td>
               <td><button [class.disabled]="sta9" (click)="standSelect(9)" class="btn btn-primary w-100">st9</button></td>
               <td><button [class.disabled]="sta10" (click)="standSelect(10)" class="btn btn-primary w-100">st10</button></td>
+          </tr>
+          <tr>
+              <td><button [class.disabled]="sta11" (click)="standSelect(11)" class="btn btn-primary w-100">st11</button></td>
+              <td><button [class.disabled]="sta12" (click)="standSelect(12)" class="btn btn-primary w-100">st12</button></td>
+              <td><button [class.disabled]="sta13" (click)="standSelect(13)" class="btn btn-primary w-100">st13</button></td>
+              <td><button [class.disabled]="sta14" (click)="standSelect(14)" class="btn btn-primary w-100">st14</button></td>
+
           </tr>
         </table>
       </div>

@@ -10,7 +10,7 @@ import { Fair } from '../models/fairs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  allFairs:Fair
+  allFairs: Array<Fair>
   loginUserData = {}
   imagePath: String = "../image/logo.png"
 
@@ -20,25 +20,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this._auth.getAllFairs().subscribe(
-      (res:Fair)=>{
+      (res: Array<Fair>) => {
         this.allFairs = res
-        console.log(this.allFairs)
 
-        for (let fair of this.allFairs.Fairs){
-          
-          if (Date.parse(fair.StartDate as string) > Date.now()){
-            localStorage.setItem("fair", fair.Fair as string)
-            break
+        for (let fair of this.allFairs) {
+          for (let f of fair.Fairs) {
+            if (Date.parse(f.StartDate as string) > Date.now()) {
+              localStorage.setItem("fair", f.Fair as string)
+              break
+            }
           }
         }
       },
-      err=>console.log(err)
-      )
+      err => console.log(err)
+    )
   }
 
   loginUser() {
     this.badInput = true;
-    
+
     this._auth.loginUser(this.loginUserData)
       .subscribe(
         (res: GetUser) => {
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
             else if (res.role === "1") {
               this.router.navigate(['/company'])
             }
-            else if (res.role === "2"){
+            else if (res.role === "2") {
               this.router.navigate(['/admin'])
             }
           }

@@ -1,0 +1,260 @@
+<div class="row mt-4 mb-4">
+  <div class="col-md-8 white-background mx-auto p-3 text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 [class.current-tab]="!step1">Step 1</h2>
+      </div>
+      <div class="col-md-4">
+        <h2 [class.current-tab]="!step2">Step 2</h2>
+      </div>
+      <div class="col-md-4">
+        <h2 [class.current-tab]="!step3">Step 3</h2>
+      </div>
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+
+    <div *ngIf="step1">
+      <div class="alert alert-danger" *ngIf="badInput" role="alert">
+        Wrong JSON file format
+      </div>
+      <h4>Basic information:</h4>
+      <label>Write JSON file here:</label>
+      <textarea [(ngModel)]="jsonFile" class="form-control rounded-5" name="json"></textarea>
+
+      <button class="btn btn-warning mt-3" (click)="convertJSON()">Convert</button>
+      <hr>
+      <div *ngIf="showInput">
+        <div class="mb-2">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="">Fair:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].Fair" name="Fair" type="text"
+                class="form-control rounded-5">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="">Start date:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].StartDate" name="StartDate" type="text"
+                class="form-control rounded-5">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="">End date:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].EndDate" name="EndDate" type="text"
+                class="form-control rounded-5">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="">Start time:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].StartTime" name="StartTime" type="time"
+                class="form-control rounded-5">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="">End time:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].EndTime" name="EndTime" type="time"
+                class="form-control rounded-5">
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="">Place:</label>
+              <input [(ngModel)]="jsonFileConverted.Fairs[0].Place" name="Place" type="text"
+                class="form-control rounded-5">
+            </div>
+
+
+          </div>
+          <div class="row">
+            <button class="btn-primary btn mx-auto col-md-2" (click)="nextStep1()">Next</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="step2">
+      <div class="col-md-12">
+        <div class="alert alert-danger" *ngIf="badInputPackage" role="alert">
+          Wrong JSON file format
+        </div>
+        <h4>Package information:</h4>
+        <label>Write JSON file here:</label>
+        <textarea [(ngModel)]="jsonFilePackage" class="form-control rounded-5" name="jsonPackage"></textarea>
+
+        <button class="btn btn-primary mr-3 mt-3" (click)="previousStep2()">Previous</button>
+        <button class="btn btn-warning mt-3" (click)="convertJSONPackage()">Convert</button>
+
+        <hr>
+      </div>
+      <div class="col-md-12" *ngIf="showInputPackage">
+        <div class="row" *ngFor="let package of jsonFileConvertedPackage.Packages">
+          <div class="col-md-12">
+            <hr>
+          </div>
+
+          <div class="col-md-6 mx-auto">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h6 class="be-inline">Title:</h6>
+                <p class="be-inline"> {{package.Title}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Content:</h6>
+                <ul>
+                  <li *ngFor="let con of package.Content">{{con}}</li>
+                </ul>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Video promotions:</h6>
+                <p class="be-inline"> {{package.VideoPromotion}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Number of lessons:</h6>
+                <p class="be-inline"> {{package.NoLessons}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Number of workshops:</h6>
+                <p class="be-inline"> {{package.NoWorkchops}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Number of presentations:</h6>
+                <p class="be-inline"> {{package.NoPresentation}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Price:</h6>
+                <p class="be-inline"> {{package.Price}}</p>
+              </li>
+
+              <li class="list-group-item">
+                <h6 class="be-inline">Maximum number of companies:</h6>
+                <p class="be-inline"> {{package.MaxCompanies}}</p>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-8 mx-auto text-center">
+            <hr>
+            <button class="btn btn-primary mr-2" (click)="nextStep2()">Next</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" *ngIf="step3">
+      <div class="col-md-12">
+        <h4>Check information:</h4>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="">Fair:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].Fair" name="Fair" type="text" class="form-control rounded-5">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="">Start date:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].StartDate" name="StartDate" type="text"
+              class="form-control rounded-5">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End date:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].EndDate" name="EndDate" type="text"
+              class="form-control rounded-5">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="">Start time:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].StartTime" name="StartTime" type="time"
+              class="form-control rounded-5">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End time:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].EndTime" name="EndTime" type="time"
+              class="form-control rounded-5">
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="">Place:</label>
+            <input [(ngModel)]="jsonFileConverted.Fairs[0].Place" name="Place" type="text"
+              class="form-control rounded-5">
+          </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+  
+            <div class="col-md-6 mx-auto" *ngFor="let package of jsonFileConvertedPackage.Packages">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h6 class="be-inline">Title:</h6>
+                  <p class="be-inline"> {{package.Title}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Content:</h6>
+                  <ul>
+                    <li *ngFor="let con of package.Content">{{con}}</li>
+                  </ul>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Video promotions:</h6>
+                  <p class="be-inline"> {{package.VideoPromotion}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Number of lessons:</h6>
+                  <p class="be-inline"> {{package.NoLessons}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Number of workshops:</h6>
+                  <p class="be-inline"> {{package.NoWorkchops}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Number of presentations:</h6>
+                  <p class="be-inline"> {{package.NoPresentation}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Price:</h6>
+                  <p class="be-inline"> {{package.Price}}</p>
+                </li>
+  
+                <li class="list-group-item">
+                  <h6 class="be-inline">Maximum number of companies:</h6>
+                  <p class="be-inline"> {{package.MaxCompanies}}</p>
+                </li>
+  
+              </ul>
+  
+            </div>
+          </div>
+
+          
+        <div class="row my-2">
+            <div class="col-md-8 mx-auto text-center">
+              <hr>
+              <button class="btn btn-primary mr-2" (click)="previousStep3()">Previous</button>
+              <button class="btn btn btn-warning" (click)="onSubmit()">Submit</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
