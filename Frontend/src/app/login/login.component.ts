@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { GetUser } from '../models/getUser';
 import { Router } from '@angular/router';
+import { Fair } from '../models/fairs';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  allFairs:Fair
   loginUserData = {}
   imagePath: String = "../image/logo.png"
 
@@ -18,6 +19,21 @@ export class LoginComponent implements OnInit {
   constructor(private _auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this._auth.getAllFairs().subscribe(
+      (res:Fair)=>{
+        this.allFairs = res
+        console.log(this.allFairs)
+
+        for (let fair of this.allFairs.Fairs){
+          
+          if (Date.parse(fair.StartDate as string) > Date.now()){
+            localStorage.setItem("fair", fair.Fair as string)
+            break
+          }
+        }
+      },
+      err=>console.log(err)
+      )
   }
 
   loginUser() {

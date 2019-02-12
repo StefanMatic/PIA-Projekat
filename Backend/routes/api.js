@@ -59,7 +59,9 @@ const User = require('../models/user')
 const CV = require('../models/cv')
 const Offer = require('../models/offer')
 const Application = require('../models/application')
-const Package = require ('../models/package')
+const Package = require('../models/package')
+const CompanyApp = require('../models/companyApplication')
+const Fair = require('../models/fair')
 
 mongoose.connect(db, err => {
     if (err) {
@@ -323,9 +325,9 @@ router.post('/findAllApplications', (req, res) => {
     })
 })
 
-router.post("/getCoverLetterPDF", (req, res)=>{
+router.post("/getCoverLetterPDF", (req, res) => {
     console.log(req.body.coverLetterPDF)
-    filePath = path.join(__dirname,'../uploads') +'/'+ req.body.coverLetterPDF
+    filePath = path.join(__dirname, '../uploads') + '/' + req.body.coverLetterPDF
     console.log(filePath)
     res.sendFile(filePath)
 })
@@ -358,5 +360,58 @@ router.post('/updatePackages', (req, res) => {
 //===========================================
 //===========================================
 
+//===========================================
+//Rad sa fair-om i aplikacijama kompanija
+//===========================================
+router.get('/allFairs', (req, res) => {
+    Fair.findOne({}, (err, fairs) => {
+        if (err)
+            console.log(err)
+        else
+            res.json(fairs)
+    })
+})
+
+router.post('/allCompanyApplications', (req, res) => {
+    CompanyApp.find({ fairName: req.body.fairName }, (err, comApp) => {
+        if (err)
+            console.log(err)
+        else
+            res.json(comApp)
+    })
+})
+
+router.post('/updateCopmanyApplication', (req, res) => {
+    CompanyApp.update({ fairName: req.body.fairName, companyName: req.body.companyName },
+        req.body,
+        (err, app) => {
+            if (err)
+                console.log(err)
+            else
+                console.log(app)
+        })
+})
+
+router.post('/companyApplication', (req, res) => {
+    let companyApp = new CompanyApp({
+        fairName: req.body.fairName,
+        package: req.body.package,
+        additional: req.body.additional,
+        price: req.body.price,
+        companyName: req.body.companyName,
+        status: req.body.status
+    })
+
+    companyApp.save((err, submit) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(submit)
+        }
+    })
+})
+//===========================================
+//===========================================
 
 module.exports = router

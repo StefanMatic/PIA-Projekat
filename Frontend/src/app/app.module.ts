@@ -37,6 +37,7 @@ import { PackagesViewComponent } from './packages-view/packages-view.component';
 import { PackagesService } from './packages.service';
 import { PackagesDetailsComponent } from './packages-details/packages-details.component';
 import { PackagesAdditionalDetailsComponent } from './packages-additional-details/packages-additional-details.component';
+import { CompanyApplicationService } from './company-application.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { PackagesAdditionalDetailsComponent } from './packages-additional-detail
     CvService, 
     CompanyOfferService,
     ApplicationService,
-    PackagesService
+    PackagesService,
+    CompanyApplicationService
   ],
   bootstrap: [AppComponent]
 })

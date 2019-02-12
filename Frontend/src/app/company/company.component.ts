@@ -14,12 +14,14 @@ import { CompanyOfferService } from '../company-offer.service';
 export class CompanyComponent implements OnInit {
   currentUser: Company;
   allCompanyOffers: Array<Offer> = []
+  fair:String
 
   constructor(private studentService: StudentService,
     private offerService: CompanyOfferService,
     private router: Router) { }
 
   ngOnInit() {
+    this.fair = localStorage.getItem("fair")
     console.log(localStorage.getItem("username"))
     this.studentService.getCurrentUser(localStorage.getItem("username"))
       .subscribe(
@@ -49,6 +51,10 @@ export class CompanyComponent implements OnInit {
     console.log(info)
     localStorage.setItem("offer", info as string)
     this.router.navigate(['/offerDetails'])
+  }
+
+  applyToFair(){
+    this.router.navigate(['/allPackages'])
   }
 
 }

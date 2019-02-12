@@ -9,6 +9,8 @@ export class AuthService {
   private _loginUri = "http://localhost:4000/api/login"
   private _registerStudentUrl = "http://localhost:4000/api/registerStudent"
   private _registerCompanyUrl = "http://localhost:4000/api/registerCompany"
+  private _getAllFairs = "http://localhost:4000/api/allFairs"
+
 
   constructor(private http: HttpClient) { }
 
@@ -49,5 +51,10 @@ export class AuthService {
 
   loginUser(user) {
     return this.http.post<any>(this._loginUri, user);
+  }
+
+  getAllFairs(){
+    console.log("getAllFairs")
+    return this.http.get(this._getAllFairs)
   }
 }
