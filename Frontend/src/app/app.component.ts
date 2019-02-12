@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Frontend';
+  role:String=''
 
   constructor(private router: Router){}
 
   logMeOut(){
     localStorage.clear()
     this.router.navigate(["/login"])
+  }
+
+  ngOnInit() {
+    this.role = localStorage.getItem('role')
+
+    if (!this.role){
+      this.role = '-1'
+    }
   }
 }

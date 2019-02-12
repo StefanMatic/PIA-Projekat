@@ -65,7 +65,7 @@
 </div>
 <div class="row mt-4">
   <div class="col-md-8 text-center mx-auto">
-    <button class="btn btn-info btn-lg mr-3" [class.disabled]="!fair || deniedFlag" routerLink="/makeOffer">Make offer</button>
+    <button class="btn btn-info btn-lg mr-3" [class.disabled]="!fair || deniedFlag || !acceptedFlag" routerLink="/makeOffer">Make offer</button>
     <button class="btn btn-info btn-lg" [class.disabled]="!fair || !haventYetApplied" (click)="applyToFair()">Apply to fair</button>
   </div>
 </div>

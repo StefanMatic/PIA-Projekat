@@ -20,10 +20,11 @@ export class CompanyComponent implements OnInit {
 
   allCompanyApplications: Array<CompanyApplication>
 
-  acceptedFlag:Boolean = false;
-  deniedFlag:Boolean = false;
-  haventYetApplied:Boolean = false;
-  rejectionMessage:String = ''
+  acceptedFlag: Boolean = false;
+  deniedFlag: Boolean = false;
+  pendingFlag: Boolean = false;
+  haventYetApplied: Boolean = false;
+  rejectionMessage: String = ''
 
   constructor(private studentService: StudentService,
     private offerService: CompanyOfferService,
@@ -36,20 +37,23 @@ export class CompanyComponent implements OnInit {
       (res: Array<CompanyApplication>) => {
         this.allCompanyApplications = res
 
-        for (let app of this.allCompanyApplications){
-          if (app.companyName === localStorage.getItem("username")){
-            if (app.status === '1'){
+        for (let app of this.allCompanyApplications) {
+          if (app.companyName === localStorage.getItem("username")) {
+            if (app.status === '1') {
               this.acceptedFlag = true
             }
-            if (app.status === '2'){
+            if (app.status === '2') {
               this.deniedFlag = true
               this.rejectionMessage = app.message
+            }
+            if (app.status === '0') {
+              this.pendingFlag = true
             }
             break
           }
         }
 
-        if (this.acceptedFlag === false && this.deniedFlag === false){
+        if (this.acceptedFlag === false && this.deniedFlag === false && this.pendingFlag === false) {
           this.haventYetApplied = true
         }
       },

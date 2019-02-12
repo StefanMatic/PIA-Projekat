@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { mimeType } from '../mime-type.validator';
 
 import { Student } from '../models/student';
+import { CustomValidators } from '../custom-validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-form',
@@ -12,28 +14,68 @@ import { Student } from '../models/student';
 })
 export class StudentFormComponent implements OnInit {
   //promenljive za rad sa podacima iz forme
-  student:any={}
-  studentRole:String = "0"
+  student: any = {}
+  studentRole: String = "0"
 
   studentForm = this.fb.group({
     accountInfo: this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-    }),
+      password: ['', Validators.compose([
+        Validators.required,
+
+        // check whether the entered password has a number
+        CustomValidators.patternValidator(/\d/, {
+          hasNumber: true
+        }),
+        // check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/[A-Z]/, {
+          hasCapitalCase: true
+        }),
+        // check whether the entered password has 3 lower case letters
+        CustomValidators.patternValidator(/(?=(.*[a-z]){3})/, {
+          hasSmallCase: true
+        }),
+        // check whether the entered password has a special character
+        CustomValidators.patternValidator(
+          /[ !?#$.*]/,
+          {
+            hasSpecialCharacters: true
+          }
+        ),
+        Validators.minLength(8),
+        Validators.maxLength(12),
+        // check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/^[a-zA-Z]/, {
+          firstChar: true
+        }),
+
+        CustomValidators.patternValidator(/^(?!.*(.)\1)[a-z|A-Z|0-9]/, {
+          noTwoSameConsecutive: true
+        })
+      ])
+      ],
+      confirmPassword: [null, Validators.compose([Validators.required])]
+    },
+      {
+        // check whether our password and confirm password match
+        validator: CustomValidators.passwordMatchValidator
+      }),
     personalInfo: this.fb.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       number: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+        Validators.email,
+        Validators.required])],
       graduated: [''],
-      image: ['', Validators.required, mimeType ]
+      image: ['', Validators.required, mimeType]
     })
   })
 
   //promenljive za rad sa slikom
-  imagePreview:string | ArrayBuffer;
+  imagePreview: string | ArrayBuffer;
 
-  constructor(private fb: FormBuilder, private _auth: AuthService) { }
+  constructor(private fb: FormBuilder, private _auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -53,8 +95,8 @@ export class StudentFormComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onSubmit(){
-    this.student.role="0";
+  onSubmit() {
+    this.student.role = "0";
 
     //account info
     this.student.username = this.studentForm.value.accountInfo.username;
@@ -70,14 +112,16 @@ export class StudentFormComponent implements OnInit {
 
     if (this.student.graduated === "")
       this.student.graduated = false;
-    
+
     console.warn(this.student);
     this._auth.registerUser(this.student).subscribe(
-      (res:Student)=>{
+      (res: Student) => {
         console.log(res)
       },
-      err=>console.log(err)
+      err => console.log(err)
     )
+
+    this.router.navigate(['/login'])
   }
 
 }

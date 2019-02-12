@@ -126,8 +126,16 @@ export class AdminCompanyLayoutComponent implements OnInit {
     )
 
     this.companyAppService.getAllFairs().subscribe(
-      (res: Fair) => {
-        this.fairs = res
+      (res: Array<Fair>) => {
+        for (let f of res) {
+          for (let fi of f.Fairs) {
+            if (fi.Fair === this.fair) {
+              this.fairs = f
+              break
+            }
+          }
+        }
+      
         this.locations = this.fairs.Locations
         console.log(this.locations)
         console.log(this.fairs)

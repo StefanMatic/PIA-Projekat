@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { mimeType } from '../mime-type.validator';
 
 import { Company } from '../models/compnay';
+import { CustomValidators } from '../custom-validators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { Company } from '../models/compnay';
   styleUrls: ['./company-form.component.css']
 })
 export class CompanyFormComponent implements OnInit {
-    //promenljive za rad sa podacima iz forme
+  //promenljive za rad sa podacima iz forme
 
   company: any = {}
   companyRole: String = "1"
@@ -20,8 +22,46 @@ export class CompanyFormComponent implements OnInit {
   companyForm = this.fb.group({
     accountInfo: this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-    }),
+      password: ['', Validators.compose([
+        Validators.required,
+
+        // check whether the entered password has a number
+        CustomValidators.patternValidator(/\d/, {
+          hasNumber: true
+        }),
+        // check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/[A-Z]/, {
+          hasCapitalCase: true
+        }),
+        // check whether the entered password has 3 lower case letters
+        CustomValidators.patternValidator(/(?=(.*[a-z]){3})/, {
+          hasSmallCase: true
+        }),
+        // check whether the entered password has a special character
+        CustomValidators.patternValidator(
+          /[ !?#$.*]/,
+          {
+            hasSpecialCharacters: true
+          }
+        ),
+        Validators.minLength(8),
+        Validators.maxLength(12),
+        // check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/^[a-zA-Z]/, {
+          firstChar: true
+        }),
+
+        CustomValidators.patternValidator(/^(?!.*(.)\1)[a-z|A-Z|0-9]/, {
+          noTwoSameConsecutive: true
+        })
+      ])
+      ],
+      confirmPassword: [null, Validators.compose([Validators.required])]
+    },
+      {
+        // check whether our password and confirm password match
+        validator: CustomValidators.passwordMatchValidator
+      }),
     companyInfo: this.fb.group({
       name: ['', Validators.required],
       location: this.fb.group({
@@ -30,11 +70,13 @@ export class CompanyFormComponent implements OnInit {
       }),
       pib: ['', Validators.required],
       numOfEmployees: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+        Validators.email,
+        Validators.required])],
       web: ['', Validators.required],
       selectedItems: ['', Validators.required],
       speciality: ['', Validators.required],
-      image: ['', Validators.required, mimeType ]
+      image: ['', Validators.required, mimeType]
     })
   })
 
@@ -43,9 +85,11 @@ export class CompanyFormComponent implements OnInit {
   dropdownSettings = {};
 
   //promenljive za rad sa slikom
-  imagePreview:string | ArrayBuffer;
+  imagePreview: string | ArrayBuffer;
 
-  constructor(private fb: FormBuilder, private _auth: AuthService) { }
+  constructor(private fb: FormBuilder,
+    private _auth: AuthService,
+    private router:Router) { }
 
   ngOnInit() {
     this.dropdownList = [
@@ -99,12 +143,12 @@ export class CompanyFormComponent implements OnInit {
     //account info
     this.company.username = this.companyForm.value.accountInfo.username;
     this.company.password = this.companyForm.value.accountInfo.password;
-    
+
     //company info
-      //location
+    //location
     this.company.city = this.companyForm.value.companyInfo.location.city;
     this.company.address = this.companyForm.value.companyInfo.location.address;
-      //other info
+    //other info
     this.company.name = this.companyForm.value.companyInfo.name;
     this.company.pib = this.companyForm.value.companyInfo.pib;
     this.company.numOfEmployees = this.companyForm.value.companyInfo.numOfEmployees;
@@ -115,13 +159,15 @@ export class CompanyFormComponent implements OnInit {
     this.company.image = this.companyForm.value.companyInfo.image;
 
     this._auth.registerCompany(this.company).subscribe(
-      (res:Company) => {
+      (res: Company) => {
         console.log(res)
       },
       err => console.log(err)
     )
 
     this.companyForm.reset();
+    this.router.navigate(['/login'])
+
   }
 
 }

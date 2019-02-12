@@ -1,34 +1,52 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">PIA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item" *ngIf="role === '-1'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/listCompanies">List all companies</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" href="#">Link</a>
+      <li class="nav-item" *ngIf="role === '0'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/student">Profile</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" routerLinkActive="active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item" *ngIf="role === '0'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/searchOffers">Search offers</a>
       </li>
+      <li class="nav-item" *ngIf="role === '0'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/searchCompany">search companies</a>
+      </li>
+
+      <li class="nav-item" *ngIf="role === '1'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/company">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="role === '1'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/makeOffer">Make offer</a>
+      </li>
+
+
+      <li class="nav-item" *ngIf="role === '2'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/admin">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="role === '2'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/allPackages">All Packages</a>
+      </li>
+      <li class="nav-item" *ngIf="role === '2'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/adminCompanyApplications">View applications</a>
+      </li>
+      <li class="nav-item" *ngIf="role === '2'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/companyLayout">Make layout</a>
+      </li>
+
     </ul>
     <ul class="navbar-nav">
-      <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-      <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-      <a class="nav-link" (click)="logMeOut()">Logout</a>        
-  </ul>
+      <a *ngIf="role === '-1'" class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      <a *ngIf="role === '-1'" class="nav-link" routerLink="/registration" routerLinkActive="active">Register</a>
+      <a *ngIf="role !== '-1'" class="nav-link" (click)="logMeOut()">Logout</a>
+    </ul>
   </div>
 </nav>
 
@@ -36,3 +54,15 @@
   <router-outlet></router-outlet>
 </div>
 
+<!-- Footer -->
+<footer class="page-footer font-small light mdb-color lighten-3 pt-4">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    © 2019 Copyright:
+    <br>
+    Stefan Matic - PIA
+  </div>
+  <!-- Copyright -->
+
+</footer>
