@@ -42,6 +42,7 @@ import { AdminCompanyApplicationsComponent } from './admin-company-applications/
 import { AdminCompanyLayoutComponent } from './admin-company-layout/admin-company-layout.component';
 import { AdminFairCreateComponent } from './admin-fair-create/admin-fair-create.component';
 import { BarRatingModule } from "ngx-bar-rating";
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { BarRatingModule } from "ngx-bar-rating";
     PackagesAdditionalDetailsComponent,
     AdminCompanyApplicationsComponent,
     AdminCompanyLayoutComponent,
-    AdminFairCreateComponent
+    AdminFairCreateComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

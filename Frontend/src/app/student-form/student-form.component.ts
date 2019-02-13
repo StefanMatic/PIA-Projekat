@@ -63,7 +63,15 @@ export class StudentFormComponent implements OnInit {
     personalInfo: this.fb.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],
-      number: ['', Validators.required],
+      number: ['', Validators.compose([
+        Validators.required,
+
+        // check whether the entered password has a number
+        CustomValidators.patternValidator(/\d/, {
+          hasNumber: true
+        })
+      ])
+      ],
       email: ['', Validators.compose([
         Validators.email,
         Validators.required])],

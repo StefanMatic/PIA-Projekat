@@ -140,6 +140,20 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.post('/updateUserPassword', (req, res) => {
+    let userData = req.body
+    User.update({ username: userData.username },
+        req.body,
+        (err, user) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(user)
+            }
+        })
+})
+
 router.get('/allCompanies', (req, res) => {
     User.find({ role: "1" }, (err, companies) => {
         if (err)
@@ -349,8 +363,8 @@ router.get('/allPackages', (req, res) => {
 router.post('/makePackage', (req, res) => {
     let newPackage = new Package({
         Packages: req.body.Packages,
-      Additional: req.body.Additional,
-      Fair: req.body.Fair
+        Additional: req.body.Additional,
+        Fair: req.body.Fair
     })
     newPackage.save((err, pack) => {
         if (err) {
@@ -453,9 +467,9 @@ router.post('/companyApplication', (req, res) => {
 //rad sa ratingom
 //===========================================
 router.post('/makeRating', (req, res) => {
-    Rating.findOneAndUpdate({CompanyName: req.body.CompanyName, Username:req.body.Username},
+    Rating.findOneAndUpdate({ CompanyName: req.body.CompanyName, Username: req.body.Username },
         req.body,
-        {upsert: true, new: true, setDefaultsOnInsert: true},
+        { upsert: true, new: true, setDefaultsOnInsert: true },
         (err, app) => {
             if (err)
                 console.log(err)

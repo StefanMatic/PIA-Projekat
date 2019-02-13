@@ -10,6 +10,8 @@ export class AuthService {
   private _registerStudentUrl = "http://localhost:4000/api/registerStudent"
   private _registerCompanyUrl = "http://localhost:4000/api/registerCompany"
   private _getAllFairs = "http://localhost:4000/api/allFairs"
+  private _updateUser = "http://localhost:4000/api/updateUserPassword"
+
 
 
   constructor(private http: HttpClient) { }
@@ -51,6 +53,17 @@ export class AuthService {
 
   loginUser(user) {
     return this.http.post<any>(this._loginUri, user);
+  }
+
+  updateUserPassword(user){
+    console.log("update password")
+    
+    const userData = {
+      username: user.username,
+      password: user.password
+    }
+
+    return this.http.post<any>(this._updateUser, user);
   }
 
   getAllFairs(){
