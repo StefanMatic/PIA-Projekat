@@ -23,12 +23,14 @@ export class LoginComponent implements OnInit {
       (res: Array<Fair>) => {
         this.allFairs = res
 
+        console.log("aaasddfffff")
         for (let fair of this.allFairs) {
           console.log(fair)
           for (let f of fair.Fairs) {
             console.log(f)
-            if (Date.parse(f.StartDate as string) > Date.now()) {
+            if (Date.parse(f.EndDate as string) > Date.now()) {
               localStorage.setItem("fair", f.Fair as string)
+              console.log("alooo bre")
               break
             }
           }

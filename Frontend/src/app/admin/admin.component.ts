@@ -42,9 +42,16 @@ export class AdminComponent implements OnInit {
               console.log(Date.parse(f.EndDate as string))
               console.log(Date.now())
               this.createFair = true
+              console.log("aaaaaaa")
             }
           }
         }
+
+        console.log(this.allFairs)
+        if (!this.allFairs.length){
+          this.createFair = true
+        }
+          
       },
       err => console.log(err)
     )
@@ -54,6 +61,9 @@ export class AdminComponent implements OnInit {
         (res: Admin) => {
           console.log(res)
           this.currentUser = res
+          console.log("bbbbbb")
+          console.log(this.createFair)
+
         },
         err => {
           console.log(err)

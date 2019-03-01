@@ -193,7 +193,10 @@ export class CompanyOfferDetailsComponent implements OnInit {
     this.myApplication.username = localStorage.getItem("username")
     this.myApplication.status = "0"
 
-    if (this.toMake || this.coverLetterText === '' || this.coverLetForm.value.coverLetterPDF !== ''){
+    console.log(this.coverLetForm.value.coverLetterPDF)
+    console.log(this.coverLetterText)
+    console.log(this.toMake)
+    if (this.toMake || (this.coverLetterText === '' && this.coverLetForm.value.coverLetterPDF === '')){
       this.applicationReady  = false
       return
     }
